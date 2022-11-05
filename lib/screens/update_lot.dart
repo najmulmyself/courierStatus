@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
+import 'package:courier_status/screens/test.dart';
 import 'package:flutter/material.dart';
 
 class UpdateLotStatus extends StatelessWidget {
@@ -36,7 +37,9 @@ class UpdateLotStatus extends StatelessWidget {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Reference Number',
-                    suffixIcon: Icon(Icons.camera_alt),
+                    suffixIcon: GestureDetector(child: Icon(Icons.camera_alt), onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Test()));
+                    },),
                   ),
                 ),
                 SizedBox(

@@ -16,15 +16,15 @@ class _TestState extends State<Test> {
   Barcode? result;
   QRViewController? controller;
 
-  // @override
-  // void reassemble() {
-  //   super.reassemble();
-  //   if (Platform.isAndroid) {
-  //     controller!.pauseCamera();
-  //   } else if (Platform.isIOS) {
-  //     controller!.resumeCamera();
-  //   }
-  // }
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller!.resumeCamera();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +39,14 @@ class _TestState extends State<Test> {
             child: QRView(
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                borderColor: Colors.red,
+                overlayColor: Colors.black54,
+                borderRadius: 10,
+                borderLength: 30,
+                borderWidth: 10,
+                cutOutSize: 300,
+              ),
             ),
           ),
           Expanded(
@@ -64,9 +72,9 @@ class _TestState extends State<Test> {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   controller?.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
 }
