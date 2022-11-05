@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 
-class Drawer extends StatelessWidget {
-  const Drawer({Key? key}) : super(key: key);
+import '../screens/update_lot.dart';
+
+class DrawerContent extends StatelessWidget {
+  const DrawerContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,20 +13,26 @@ class Drawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          child: Text('Drawer Header'),
+          child: Text('Courier'),
           decoration: BoxDecoration(
             color: Colors.blue,
           ),
         ),
-        ListTile(
-          title: Text('Item 1'),
-          onTap: () {
-            // Update the state of the app.
-            // ...
-          },
+        Center(
+          child: ListTile(
+            leading: Icon(Icons.stacked_bar_chart),
+            title: Text('Update lot status'),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UpdateLotStatus()));
+            },
+          ),
         ),
         ListTile(
-          title: Text('Item 2'),
+          leading: Icon(Icons.local_shipping),
+          title: Text('Shipments'),
           onTap: () {
             // Update the state of the app.
             // ...
