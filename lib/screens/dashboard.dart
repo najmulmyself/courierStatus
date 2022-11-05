@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:courier_status/component/drawer.dart';
+import 'package:courier_status/component/drawer_content.dart';
 import 'package:flutter/material.dart';
 
 class DashBoard extends StatelessWidget {

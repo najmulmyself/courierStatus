@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:courier_status/screens/shipment.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/update_lot.dart';
@@ -13,9 +14,12 @@ class DrawerContent extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          child: Text('Courier'),
+          child: Image(
+            image: NetworkImage(
+                'http://bookingms.s3-website-ap-southeast-1.amazonaws.com/assets/img/logo-update.png'),
+          ),
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.grey.shade300,
           ),
         ),
         Center(
@@ -36,6 +40,12 @@ class DrawerContent extends StatelessWidget {
           onTap: () {
             // Update the state of the app.
             // ...
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Shipment(),
+              ),
+            );
           },
         ),
       ],
