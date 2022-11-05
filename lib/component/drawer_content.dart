@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:courier_status/screens/home_page.dart';
 import 'package:courier_status/screens/shipment.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,7 @@ class DrawerContent extends StatelessWidget {
       children: [
         DrawerHeader(
           child: Image(
-            image: NetworkImage(
-                'http://bookingms.s3-website-ap-southeast-1.amazonaws.com/assets/img/logo-update.png'),
+            image: AssetImage('assets/images/logo.png'),
           ),
           decoration: BoxDecoration(
             color: Colors.grey.shade300,
@@ -47,6 +47,30 @@ class DrawerContent extends StatelessWidget {
               ),
             );
           },
+        ),
+        Center(
+          child: ListTile(
+            leading: Icon(Icons.person),
+            title: Text('Profile'),
+            onTap: () {
+              // Update the state of the app.
+              // // ...
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => UpdateLotStatus()));
+            },
+          ),
+        ),
+        Center(
+          child: ListTile(
+            leading: Icon(Icons.logout),
+            title: Text('Sign out'),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            },
+          ),
         ),
       ],
     );

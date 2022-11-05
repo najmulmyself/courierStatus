@@ -50,20 +50,56 @@ class Shipment extends StatelessWidget {
               ),
               columns: [
                 DataColumn(
-                  label: Text("Reference"),
+                  label: Text("No"),
                 ),
                 DataColumn(
-                  label: Text("Location Status"),
+                  label: Text("Action"),
                 ),
                 DataColumn(
-                  label: Text("Lots of"),
+                  label: Text("Date"),
+                ),
+                DataColumn(
+                  label: Text("Category"),
+                ),
+                DataColumn(
+                  label: Text("Shipment No"),
                 ),
               ],
               rows: [
                 DataRow(
                   cells: [
                     DataCell(Text('1')),
+                    DataCell(
+                      Center(
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              color: Colors.black38,
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              color: Colors.red,
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     DataCell(Text('Active')),
+                    DataCell(Text('-')),
                     DataCell(Text('-')),
                   ],
                 ),
