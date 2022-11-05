@@ -69,6 +69,8 @@ class _TestState extends State<Test> {
         result = scanData;
       });
     });
+    controller.pauseCamera();
+    controller.resumeCamera();
   }
 
   @override
