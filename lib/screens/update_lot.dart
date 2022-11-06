@@ -7,7 +7,9 @@ class UpdateLotStatus extends StatelessWidget {
   List items = [
     'Under Processing China',
   ];
+  UpdateLotStatus({this.result});
   String? newValue = "Select Status";
+  String? result;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +38,14 @@ class UpdateLotStatus extends StatelessWidget {
                 TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Reference Number',
-                    suffixIcon: GestureDetector(child: Icon(Icons.camera_alt), onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Test()));
-                    },),
+                    labelText: result == null ? 'Reference Number' : result,
+                    suffixIcon: GestureDetector(
+                      child: Icon(Icons.camera_alt),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Test()));
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(

@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:courier_status/screens/update_lot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -16,15 +17,15 @@ class _TestState extends State<Test> {
   Barcode? result;
   QRViewController? controller;
 
-  // @override
-  // void reassemble() {
-  //   super.reassemble();
-  //   if (Platform.isAndroid) {
-  //     controller!.pauseCamera();
-  //   } else if (Platform.isIOS) {
-  //     controller!.resumeCamera();
-  //   }
-  // }
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller!.resumeCamera();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +52,35 @@ class _TestState extends State<Test> {
           Expanded(
             flex: 1,
             child: Center(
-              child: (result != null)
-                  ? Text(
-                      'Barcode Type: ${(result!.format)}   Data: ${result!.code}')
-                  : Text('Scan a code'),
-            ),
+                child: (result != null)
+                    // ? Text(
+                    //     'Barcode Type: ${(result!.format)}   Data: ${result!.code}')
+                    // : Text('Scan a code'),
+                    ?  Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 28.0, vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('${result!.code}'),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            UpdateLotStatus(result: result!.code,)));
+                              },
+                              icon: Icon(
+                                Icons.check_box,
+                                size: 35,
+                                color: Colors.green,
+                              ),
+                            )
+                          ],
+                        ),
+                      ):Text("Reading Data..")
+                    ),
           )
         ],
       ),
