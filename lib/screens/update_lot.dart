@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
 import 'package:courier_status/screens/test.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +35,11 @@ class UpdateLotStatus extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                TextField(
+                TextFormField(
+                  initialValue: result != '' ? result : '',
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: result == null ? 'Reference Number' : result,
+                    labelText: 'Reference Number',
                     suffixIcon: GestureDetector(
                       child: Icon(Icons.camera_alt),
                       onTap: () {
