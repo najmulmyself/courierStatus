@@ -15,6 +15,7 @@ class ScanCode extends StatefulWidget {
 class _ScanCodeState extends State<ScanCode> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
+  String newResult = '';
   QRViewController? controller;
 
   @override
@@ -62,11 +63,16 @@ class _ScanCodeState extends State<ScanCode> {
                             Text('${result!.code}'),
                             ElevatedButton(
                               onPressed: () {
+                                dynamic data = result!.code;
+                                dynamic dataCommaSplit = data.split(",");
+                                dynamic refData = dataCommaSplit[0];
+                                dynamic refDataSplit = refData.split(":");
+                                newResult = refDataSplit[1];
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => UpdateLotStatus(
-                                      result: result!.code,
+                                      result: newResult,
                                     ),
                                   ),
                                 );
