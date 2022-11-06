@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:courier_status/screens/home_page.dart';
-import 'package:courier_status/screens/test.dart';
+import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/dashboard.dart';

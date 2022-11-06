@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
-import 'package:courier_status/screens/test.dart';
+import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
 class UpdateLotStatus extends StatelessWidget {
@@ -43,8 +43,10 @@ class UpdateLotStatus extends StatelessWidget {
                     suffixIcon: GestureDetector(
                       child: Icon(Icons.camera_alt),
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Test()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScanCode()));
                       },
                     ),
                   ),

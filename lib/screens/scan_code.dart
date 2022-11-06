@@ -7,12 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class Test extends StatefulWidget {
+class ScanCode extends StatefulWidget {
   @override
-  State<Test> createState() => _TestState();
+  State<ScanCode> createState() => _ScanCodeState();
 }
 
-class _TestState extends State<Test> {
+class _ScanCodeState extends State<ScanCode> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
@@ -53,35 +53,36 @@ class _TestState extends State<Test> {
             flex: 1,
             child: Center(
                 child: (result != null)
-                    // ? Text(
-                    //     'Barcode Type: ${(result!.format)}   Data: ${result!.code}')
-                    // : Text('Scan a code'),
-                    ?  Padding(
+                    ? Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 10),
-                        child: Row(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('${result!.code}'),
-                            IconButton(
+                            ElevatedButton(
                               onPressed: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            UpdateLotStatus(result: result!.code,)));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UpdateLotStatus(
+                                      result: result!.code,
+                                    ),
+                                  ),
+                                );
                               },
-                              icon: Icon(
-                                Icons.check_box,
-                                size: 35,
-                                color: Colors.green,
-                              ),
-                            )
+                              child: Text("Done"),
+                            ),
                           ],
                         ),
-                      ):Text("Reading Data..")
-                    ),
-          )
+                      )
+                    : Text(
+                        "Scanning...",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      )),
+          ),
         ],
       ),
     );
