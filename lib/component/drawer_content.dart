@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:courier_status/apiService/lot_status_view.dart';
-import 'package:courier_status/screens/home_page.dart';
 import 'package:courier_status/screens/shipment.dart';
 import 'package:courier_status/screens/sign_in_page.dart';
 import 'package:flutter/material.dart';
