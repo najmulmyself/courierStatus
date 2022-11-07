@@ -72,6 +72,9 @@ class UpdateLotStatus extends StatelessWidget {
                       },
                     ),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff950101),
+                      ),
                       onPressed: () {},
                       child: Text("Update"),
                     ),

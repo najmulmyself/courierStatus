@@ -2,8 +2,11 @@
 
 import 'dart:convert';
 
+import 'package:courier_status/apiService/setToken.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../apiService/lot_status_view.dart';
 
 class SignInPage extends StatelessWidget {
   final emailController = TextEditingController();
@@ -21,6 +24,7 @@ class SignInPage extends StatelessWidget {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final accToken = data['access'];
+      SetToken().setToken(accToken);
       print(data['access']);
       Navigator.pushNamed(context, '/dashboard');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -44,14 +48,15 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign In'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset("assets/images/logo.png", height: 120),
+            SizedBox(
+              height: 20,
+            ),
             TextField(
               keyboardType: TextInputType.emailAddress,
               controller: emailController,
@@ -76,6 +81,7 @@ class SignInPage extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
+                primary: Color(0xff950101),
                 minimumSize: Size(double.infinity, 50),
               ),
               onPressed: () {
