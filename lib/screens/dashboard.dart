@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:courier_status/component/drawer_content.dart';
+import 'package:courier_status/screens/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 class DashBoard extends StatelessWidget {
@@ -8,13 +9,18 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(child: DrawerContent(),),
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
-      body: Center(
-        child: Text('Dashboard'),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        drawer: Drawer(
+          child: DrawerContent(),
+        ),
+        appBar: AppBar(
+          title: Text('Dashboard'),
+        ),
+        body: Center(
+          child: Text('Dashboard'),
+        ),
       ),
     );
   }

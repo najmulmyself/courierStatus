@@ -23,44 +23,69 @@ class SignInPage extends StatelessWidget {
       final accToken = data['access'];
       print(data['access']);
       Navigator.pushNamed(context, '/dashboard');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Sign in Successful'),
+        ),
+      );
+      emailController.clear();
+      passwordController.clear();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Wrong Email or Password'),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            controller: emailController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Enter your email address',
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign In'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              controller: emailController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your email address',
+              ),
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          TextField(
-            controller: passwordController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Enter your password',
+            SizedBox(
+              height: 30,
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              signIn(context);
-              // Navigator.pushNamed(context, '/dashboard');
-            },
-            child: Text('Login'),
-          ),
-        ],
+            TextField(
+              obscureText: true,
+              controller: passwordController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your password',
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50),
+              ),
+              onPressed: () {
+                signIn(context);
+                // Navigator.pushNamed(context, '/dashboard');
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
       ),
     );
   }

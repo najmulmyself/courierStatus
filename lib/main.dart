@@ -12,6 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        // primarySwatch: Color(0xff950101),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: Color(0xff950101),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: HomePage(),
