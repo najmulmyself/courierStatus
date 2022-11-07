@@ -2,6 +2,7 @@
 
 import 'package:courier_status/screens/home_page.dart';
 import 'package:courier_status/screens/shipment.dart';
+import 'package:courier_status/screens/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/update_lot.dart';
@@ -67,8 +68,8 @@ class DrawerContent extends StatelessWidget {
             onTap: () {
               // Update the state of the app.
               // ...
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(builder: (context) => SignInPage(),), (route) => false);
             },
           ),
         ),
