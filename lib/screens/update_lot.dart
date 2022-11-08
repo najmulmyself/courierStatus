@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
+import 'package:courier_status/Model/testData.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
@@ -115,6 +116,20 @@ class UpdateLotStatus extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          FutureBuilder<List<Data>?>(
+            future: ApiService().getUpdateStatusView(),
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                return Center(
+                  child: Text("${snapshot.data![1].country!.name}"),
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
           ),
         ],
       ),
