@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:courier_status/Model/update_lot_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/shipment.dart';
 import 'package:courier_status/screens/sign_in_page.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../screens/update_lot.dart';
 
 class DrawerContent extends StatelessWidget {
-  const DrawerContent({Key? key}) : super(key: key);
+  UpdateLotModel? dropdrownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +31,17 @@ class DrawerContent extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text('Update lot status'),
-            onTap: () {
+            onTap: () async {
               // Update the state of the app.
               // ...
-              ApiService().getUpdateStatusView();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UpdateLotStatus()));
+              dropdrownValue = await ApiService().getUpdateStatusView();
+              // ignore: use_build_context_synchronously
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UpdateLotStatus(
+                            data: dropdrownValue!.data,
+                          )));
             },
           ),
         ),

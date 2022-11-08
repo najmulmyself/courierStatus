@@ -1,19 +1,20 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
-import 'package:courier_status/Model/testData.dart';
-import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
+import '../Model/update_lot_model.dart';
+
 class UpdateLotStatus extends StatelessWidget {
-  List items = [
+  List items = [ 
     'Under Processing China',
   ];
-  UpdateLotStatus({this.result});
+  UpdateLotStatus({this.result, this.data});
   String? newValue = "Select Status";
   String? result;
+  List<Datum>? data;
 
-  final data = ApiService().getUpdateStatusView();
+  // final data = ApiService().getUpdateStatusView();
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +64,12 @@ class UpdateLotStatus extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     DropdownButton(
-                      hint: Text('Select Status'),
-                      items: items
+                      hint:
+                          Text('Select Status'), // uNderprocessing - Bangladesh
+                      items: data!
                           .map(
-                            (e) => DropdownMenuItem(
-                              child: Text(e),
+                            (Datum e) => DropdownMenuItem(
+                              child: Text("${e.name} - ${e.country!.name!}"),
                               value: newValue,
                             ),
                           )
@@ -117,20 +119,20 @@ class UpdateLotStatus extends StatelessWidget {
               ],
             ),
           ),
-          FutureBuilder<List<Data>?>(
-            future: ApiService().getUpdateStatusView(),
-            builder: ((context, snapshot) {
-              if (snapshot.hasData) {
-                return Center(
-                  child: Text("${snapshot.data![1].country!.name}"),
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
-          ),
+          // FutureBuilder<List<Data>?>(
+          //   future: ApiService().getUpdateStatusView(),+
+          //   builder: ((context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       return Center(
+          //         child: Text("${snapshot.data![1].country!.name}"),
+          //       );
+          //     } else {
+          //       return Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     }
+          //   }),
+          // ),
         ],
       ),
     );
