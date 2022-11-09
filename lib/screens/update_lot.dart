@@ -17,7 +17,7 @@ class UpdateLotStatus extends StatefulWidget {
 
 class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Datum? newValue;
-  int? index;
+  int? indexId;
 
   @override
   void initState() {
@@ -88,7 +88,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       onChanged: (Datum? v) {
                         setState(() {
                           newValue = v;
-                          print("Hello: $index  and ${v?.id}");
+                          indexId = v?.id;
+                          // print("Hello: $index  and ${v?.id}");
                         });
                       },
                     ),
@@ -96,7 +97,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xff950101),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        print(indexId);
+                      },
                       child: Text("Update"),
                     ),
                   ],
