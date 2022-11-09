@@ -15,10 +15,17 @@ class UpdateLotStatus extends StatefulWidget {
 }
 
 class _UpdateLotStatusState extends State<UpdateLotStatus> {
-  String? newValue;
-  List items = ['Under Processing China', 'Delivered Bangladesh'];
+  // List items = [
+  //   'Under Processing China',
+  // ];
 
-  // final dataDrop = widget.data.map((e) => )
+  String? newValue;
+
+  @override
+  void initState() {
+    newValue = "${widget.data![0].name} - ${widget.data![0].country!.name}";
+    super.initState();
+  }
 
   // final data = ApiService().getUpdateStatusView();
   @override
@@ -76,22 +83,14 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           .map(
                             (Datum e) => DropdownMenuItem(
                               child: Text("${e.name} - ${e.country!.name!}"),
-                              value: newValue,
+                              value: "${e.name} - ${e.country!.name!}",
                             ),
                           )
                           .toList(),
-                      // items: items
-                      //     .map(
-                      //       (e) => DropdownMenuItem(
-                      //         child: Text(e),
-                      //         value: e,
-                      //       ),
-                      //     )
-                      //     .toList(),
-                      onChanged: (value) {
+                      // value: newValue,
+                      onChanged: (v) {
                         setState(() {
-                          newValue = value as String?;
-                          print(newValue);
+                          newValue = v.toString();
                         });
                       },
                     ),
