@@ -20,6 +20,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   // ];
 
   String? newValue;
+  int? index;
 
   @override
   void initState() {
@@ -91,6 +92,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       onChanged: (v) {
                         setState(() {
                           newValue = v.toString();
+                          
                           print(newValue);
                         });
                       },
