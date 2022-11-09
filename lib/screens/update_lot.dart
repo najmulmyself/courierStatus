@@ -7,6 +7,7 @@ import '../Model/update_lot_model.dart';
 
 class UpdateLotStatus extends StatefulWidget {
   UpdateLotStatus({this.result, this.data});
+
   String? result;
   List<Datum>? data;
 
@@ -15,12 +16,12 @@ class UpdateLotStatus extends StatefulWidget {
 }
 
 class _UpdateLotStatusState extends State<UpdateLotStatus> {
-  String? newValue;
+  Datum? newValue;
   int? index;
 
   @override
   void initState() {
-    newValue = "${widget.data![0].name} - ${widget.data![0].country!.name}";
+    newValue = widget.data![0];
     super.initState();
   }
 
@@ -75,19 +76,19 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       value: newValue,
                       hint:
                           Text('Select Status'), // uNderprocessing - Bangladesh
-                      items: widget.data!.map((Datum e) {
-                    
-                        return DropdownMenuItem(
-                          child: Text("${e.name} - ${e.country!.name!} "),
-                          value: "${e.name} - ${e.country!.name!}",
-                        );
-                      }).toList(),
-                      // value: newValue,
-                      onChanged: (v) {
+                      items: widget.data!.map(
+                        (Datum item) {
+                          return DropdownMenuItem<Datum>(
+                            child:
+                                Text("${item.name} - ${item.country!.name!} "),
+                            value: item,
+                          );
+                        },
+                      ).toList(),
+                      onChanged: (Datum? v) {
                         setState(() {
-                          newValue = v.toString();
-
-                          print("Hello: ${index}  and ${v}");
+                          newValue = v;
+                          print("Hello: $index  and ${v?.id}");
                         });
                       },
                     ),
