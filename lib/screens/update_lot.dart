@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
+import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +20,19 @@ class UpdateLotStatus extends StatefulWidget {
 class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Datum? newValue;
   int? indexId;
+  UpdateStatus? updateStatusData;
 
   @override
   void initState() {
     newValue = widget.data![0];
     super.initState();
+  }
+
+  Future getUpdateDatabyId() async {
+    setState(() async {
+      updateStatusData =
+          await ApiService().updateStatus(indexId, widget.result);
+    });
   }
 
   @override
@@ -99,7 +108,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                         primary: Color(0xff950101),
                       ),
                       onPressed: () {
-                        ApiService().updateStatus(indexId, widget.result);
+                        // ApiService().updateStatus(indexId, widget.result);
+                        getUpdateDatabyId();
                       },
                       child: Text("Update"),
                     ),
@@ -127,13 +137,23 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                 ),
               ],
               rows: [
-                DataRow(
-                  cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Active')),
-                    DataCell(Text('-')),
-                  ],
-                ),
+                updateStatusData?.data != null
+                    ? DataRow(
+                        cells: [
+                          DataCell(Text(
+                              "${updateStatusData?.data?.reference}.toString()")),
+                          DataCell(Text(
+                              "${updateStatusData?.data?.locationStatus}")),
+                          DataCell(Text("${updateStatusData?.data?.booking}")),
+                        ],
+                      )
+                    : DataRow(
+                        cells: [
+                          DataCell(Text("-")),
+                          DataCell(Text("-")),
+                          DataCell(Text("-")),
+                        ],
+                      ),
               ],
             ),
           ),
