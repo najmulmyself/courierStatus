@@ -5,17 +5,22 @@ import 'package:flutter/material.dart';
 
 import '../Model/update_lot_model.dart';
 
-class UpdateLotStatus extends StatelessWidget {
-  List items = [ 
-    'Under Processing China',
-  ];
+class UpdateLotStatus extends StatefulWidget {
   UpdateLotStatus({this.result, this.data});
-  String? newValue = "Select Status";
   String? result;
   List<Datum>? data;
 
-  // final data = ApiService().getUpdateStatusView();
+  @override
+  State<UpdateLotStatus> createState() => _UpdateLotStatusState();
+}
 
+class _UpdateLotStatusState extends State<UpdateLotStatus> {
+  String? newValue;
+  List items = ['Under Processing China', 'Delivered Bangladesh'];
+
+  // final dataDrop = widget.data.map((e) => )
+
+  // final data = ApiService().getUpdateStatusView();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +47,7 @@ class UpdateLotStatus extends StatelessWidget {
                   height: 30,
                 ),
                 TextFormField(
-                  initialValue: result != '' ? result : '',
+                  initialValue: widget.result != '' ? widget.result : '',
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Reference Number',
@@ -64,9 +69,10 @@ class UpdateLotStatus extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     DropdownButton(
+                      value: newValue,
                       hint:
                           Text('Select Status'), // uNderprocessing - Bangladesh
-                      items: data!
+                      items: widget.data!
                           .map(
                             (Datum e) => DropdownMenuItem(
                               child: Text("${e.name} - ${e.country!.name!}"),
@@ -74,8 +80,19 @@ class UpdateLotStatus extends StatelessWidget {
                             ),
                           )
                           .toList(),
-                      onChanged: (v) {
-                        newValue = v.toString();
+                      // items: items
+                      //     .map(
+                      //       (e) => DropdownMenuItem(
+                      //         child: Text(e),
+                      //         value: e,
+                      //       ),
+                      //     )
+                      //     .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          newValue = value as String?;
+                          print(newValue);
+                        });
                       },
                     ),
                     ElevatedButton(
