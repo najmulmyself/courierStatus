@@ -5,17 +5,30 @@ import 'package:flutter/material.dart';
 
 import '../Model/update_lot_model.dart';
 
-class UpdateLotStatus extends StatelessWidget {
-  List items = [ 
-    'Under Processing China',
-  ];
+class UpdateLotStatus extends StatefulWidget {
   UpdateLotStatus({this.result, this.data});
-  String? newValue = "Select Status";
+
   String? result;
   List<Datum>? data;
 
-  // final data = ApiService().getUpdateStatusView();
+  @override
+  State<UpdateLotStatus> createState() => _UpdateLotStatusState();
+}
 
+class _UpdateLotStatusState extends State<UpdateLotStatus> {
+  // List items = [
+  //   'Under Processing China',
+  // ];
+
+  String? newValue;
+
+  @override
+  void initState() {
+    newValue = "${widget.data![0].name} - ${widget.data![0].country!.name}";
+    super.initState();
+  }
+
+  // final data = ApiService().getUpdateStatusView();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +55,7 @@ class UpdateLotStatus extends StatelessWidget {
                   height: 30,
                 ),
                 TextFormField(
-                  initialValue: result != '' ? result : '',
+                  initialValue: widget.result != '' ? widget.result : '',
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Reference Number',
@@ -66,16 +79,19 @@ class UpdateLotStatus extends StatelessWidget {
                     DropdownButton(
                       hint:
                           Text('Select Status'), // uNderprocessing - Bangladesh
-                      items: data!
+                      items: widget.data!
                           .map(
                             (Datum e) => DropdownMenuItem(
                               child: Text("${e.name} - ${e.country!.name!}"),
-                              value: newValue,
+                              value: "${e.name} - ${e.country!.name!}",
                             ),
                           )
                           .toList(),
+                      value: newValue,
                       onChanged: (v) {
-                        newValue = v.toString();
+                        setState(() {
+                          newValue = v.toString();
+                        });
                       },
                     ),
                     ElevatedButton(
