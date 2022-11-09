@@ -91,6 +91,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       onChanged: (v) {
                         setState(() {
                           newValue = v.toString();
+                          print(newValue);
                         });
                       },
                     ),
