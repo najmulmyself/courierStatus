@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
+import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +99,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                         primary: Color(0xff950101),
                       ),
                       onPressed: () {
-                        print(indexId);
+                        ApiService().updateStatus(indexId, widget.result);
                       },
                       child: Text("Update"),
                     ),

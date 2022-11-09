@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:courier_status/Model/testData.dart';
 import 'package:courier_status/Model/update_lot_model.dart';
+import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/setToken.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,5 +37,21 @@ class ApiService {
       print("Error");
     }
     return datares;
+  }
+
+  Future updateStatus(id, refCode) async {
+    final token = await GetToken().getToken();
+    final url =
+        Uri.parse(baseUrl + "update-lot-status/" + id + "/" + refCode + "/");
+    final response = await http.get(url, headers: {
+      "Authorization": "Bearer $token",
+    });
+    if (response.statusCode == 200) {
+      print("Update Status Happend");
+      
+    return UpdateStatus.fromJson(jsonDecode(response.body));
+    } else {
+      print("Error");
+    }
   }
 }
