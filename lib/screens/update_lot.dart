@@ -15,9 +15,7 @@ class UpdateLotStatus extends StatefulWidget {
 }
 
 class _UpdateLotStatusState extends State<UpdateLotStatus> {
-  // List items = [
-  //   'Under Processing China',
-  // ];
+
 
   String? newValue;
   int? index;
@@ -28,7 +26,6 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
     super.initState();
   }
 
-  // final data = ApiService().getUpdateStatusView();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,20 +135,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
               ],
             ),
           ),
-          // FutureBuilder<List<Data>?>(
-          //   future: ApiService().getUpdateStatusView(),+
-          //   builder: ((context, snapshot) {
-          //     if (snapshot.hasData) {
-          //       return Center(
-          //         child: Text("${snapshot.data![1].country!.name}"),
-          //       );
-          //     } else {
-          //       return Center(
-          //         child: CircularProgressIndicator(),
-          //       );
-          //     }
-          //   }),
-          // ),
+        
         ],
       ),
     );
