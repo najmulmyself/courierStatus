@@ -25,13 +25,14 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   @override
   void initState() {
     newValue = widget.data![0];
+    // print("Hello restult ${widget.result.toString()}");
     super.initState();
   }
 
   Future getUpdateDatabyId() async {
     setState(() async {
       updateStatusData =
-          await ApiService().updateStatus(indexId, widget.result);
+          await ApiService().updateStatus(indexId, widget.result.toString());
     });
   }
 
@@ -141,7 +142,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                     ? DataRow(
                         cells: [
                           DataCell(Text(
-                              "${updateStatusData?.data?.reference}.toString()")),
+                              "${updateStatusData?.data?.reference.toString()}")),
                           DataCell(Text(
                               "${updateStatusData?.data?.locationStatus}")),
                           DataCell(Text("${updateStatusData?.data?.booking}")),
