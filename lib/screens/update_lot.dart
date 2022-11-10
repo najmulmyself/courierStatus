@@ -29,6 +29,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
     DataCell(Text("-")),
   ];
 
+  List<UpdateStatus> dataRow = [];
+
   @override
   void initState() {
     // newValue = widget.data![0];
@@ -36,10 +38,10 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
     super.initState();
   }
 
-  Future getUpdateDatabyId() async {
-    print(" Id and refcode : ${indexId} and ${widget.result}");
-    print("Hello restult ${updateStatusData?.data?.locationStatus}");
-    updateStatusData =
+  Future<UpdateStatus> getUpdateDatabyId() async {
+    // print(" Id and refcode : ${indexId} and ${widget.result}");
+    // print("Hello restult ${updateStatusData?.data?.locationStatus}");
+    return updateStatusData =
         await ApiService().updateStatus(indexId, widget.result.toString());
   }
 
@@ -123,8 +125,54 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       ),
                       onPressed: () async {
                         // ApiService().updateStatus(indexId, widget.result);
-                        await getUpdateDatabyId();
+                        UpdateStatus dataContent = await getUpdateDatabyId();
                         setState(() {
+                          // if(dataRow.contains(dataContent.data!.reference  ))
+
+                          if (dataRow.isNotEmpty) {
+                            // for (int i = 0; i < dataRow.length; i++) {
+                            //   print(
+                            //       "rrrrrrrrrrrrrrrrr ${dataRow[i].data!.reference}");
+                            //   print(i);
+                            //   print(
+                            //       "sssssssssssssssss ${dataContent.data!.reference}");
+                            //   if (dataRow[i].data!.reference ==
+                            //       dataContent.data!.reference) {
+                            //     setState(() {
+                            //       dataRow.removeAt(dataRow.indexWhere(
+                            //           (element) =>
+                            //               element.data!.reference ==
+                            //               dataContent.data!.reference));
+                            //       dataRow.add(dataContent);
+                            //     });
+                            //   } else {
+                            //     dataRow.add(dataContent);
+                            //   }
+                            // }
+
+                            if ((dataRow.singleWhere(
+                                    (it) =>
+                                        it.data!.reference ==
+                                        dataContent.data!.reference,
+                                    orElse: () {
+                                  return dataContent;
+                                })) !=
+                                null) {
+                              setState(() {
+                                dataRow.removeAt(dataRow.indexWhere((element) =>
+                                    element.data!.reference ==
+                                    dataContent.data!.reference));
+                                dataRow.add(dataContent);
+                              });
+                            } else {
+                              setState(() {
+                                dataRow.add(dataContent);
+                              });
+                              print('Added!');
+                            }
+                          } else {
+                            dataRow.add(dataContent);
+                          }
                           // refCodeController.text = '';
                         });
                       },
@@ -153,29 +201,47 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                   label: Text("Lots of"),
                 ),
               ],
-              rows: [
-                updateStatusData?.data != null
-                    ? DataRow(
-                        cells: [
-                          DataCell(Text(
-                              "${updateStatusData?.data?.reference.toString()}")),
-                          DataCell(Text(
-                              "${updateStatusData?.data?.locationStatus}")),
-                          DataCell(Text("${updateStatusData?.data?.booking}")),
-                        ],
-                      )
-                    : DataRow(
-                        cells: listRow!,
-                      ),
-                DataRow(
-                  cells: [
-                    DataCell(Text(
-                        "${updateStatusData?.data?.reference.toString()}")),
-                    DataCell(Text("${updateStatusData?.data?.locationStatus}")),
-                    DataCell(Text("${updateStatusData?.data?.booking}")),
-                  ],
-                )
-              ],
+              rows: dataRow.isNotEmpty
+                  ? dataRow
+                      .map((e) => DataRow(
+                            cells: [
+                              DataCell(Text("${e.data?.reference.toString()}")),
+                              DataCell(Text("${e.data?.locationStatus}")),
+                              DataCell(Text("${e.data?.booking}")),
+                            ],
+                          ))
+                      .toList()
+                  : [
+                      DataRow(cells: [
+                        DataCell(Text("-")),
+                        DataCell(Text("-")),
+                        DataCell(Text("-")),
+                      ])
+                    ],
+              // rows: [
+              //   updateStatusData?.data != null
+              //       ?
+              //       DataRow(
+              //           cells: [
+              //             DataCell(Text(
+              //                 "${updateStatusData?.data?.reference.toString()}")),
+              //             DataCell(Text(
+              //                 "${updateStatusData?.data?.locationStatus}")),
+              //             DataCell(Text("${updateStatusData?.data?.booking}")),
+              //           ],
+              //         )
+              //       : DataRow(
+              //           cells: listRow!,
+              //         ),
+              //   // DataRow(
+              //   //   cells: [
+              //   //     DataCell(Text(
+              //   //         "${updateStatusData?.data?.reference.toString()}")),
+              //   //     DataCell(Text("${updateStatusData?.data?.locationStatus}")),
+              //   //     DataCell(Text("${updateStatusData?.data?.booking}")),
+              //   //   ],
+              //   // )
+              // ],
             ),
           ),
         ],
