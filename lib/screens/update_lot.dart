@@ -21,7 +21,13 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Datum? newValue;
   int? indexId;
   UpdateStatus? updateStatusData;
-  TextEditingController refCodeController = TextEditingController();
+  // TextEditingController refCodeController = TextEditingController();
+
+  List<DataCell>? listRow = [
+    DataCell(Text("-")),
+    DataCell(Text("-")),
+    DataCell(Text("-")),
+  ];
 
   @override
   void initState() {
@@ -31,10 +37,10 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   }
 
   Future getUpdateDatabyId() async {
-    print(" Id and refcode : ${indexId} and ${refCodeController.text}");
+    print(" Id and refcode : ${indexId} and ${widget.result}");
     print("Hello restult ${updateStatusData?.data?.locationStatus}");
     updateStatusData =
-        await ApiService().updateStatus(indexId, refCodeController.text);
+        await ApiService().updateStatus(indexId, widget.result.toString());
   }
 
   @override
@@ -63,8 +69,13 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                   height: 30,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      widget.result = value;
+                    });
+                  },
                   initialValue: widget.result != '' ? widget.result : '',
-                  controller: refCodeController,
+                  // controller: refCodeController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Reference Number',
@@ -113,7 +124,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       onPressed: () async {
                         // ApiService().updateStatus(indexId, widget.result);
                         await getUpdateDatabyId();
-                        setState(() {});
+                        setState(() {
+                          // refCodeController.text = '';
+                        });
                       },
                       child: Text("Update"),
                     ),
@@ -152,12 +165,16 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                         ],
                       )
                     : DataRow(
-                        cells: [
-                          DataCell(Text("-")),
-                          DataCell(Text("-")),
-                          DataCell(Text("-")),
-                        ],
+                        cells: listRow!,
                       ),
+                DataRow(
+                  cells: [
+                    DataCell(Text(
+                        "${updateStatusData?.data?.reference.toString()}")),
+                    DataCell(Text("${updateStatusData?.data?.locationStatus}")),
+                    DataCell(Text("${updateStatusData?.data?.booking}")),
+                  ],
+                )
               ],
             ),
           ),

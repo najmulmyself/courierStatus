@@ -68,11 +68,13 @@ class _ScanCodeState extends State<ScanCode> {
                                 dynamic refData = dataCommaSplit[0];
                                 dynamic refDataSplit = refData.split(":");
                                 newResult = refDataSplit[1];
+                                print(
+                                    "newResurrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrlt : $newResult");
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => UpdateLotStatus(
-                                      result: newResult,
+                                      result: newResult.toString(),
                                     ),
                                   ),
                                 );
