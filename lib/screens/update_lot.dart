@@ -21,19 +21,20 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Datum? newValue;
   int? indexId;
   UpdateStatus? updateStatusData;
+  TextEditingController refCodeController = TextEditingController();
 
   @override
   void initState() {
-    newValue = widget.data![0];
+    // newValue = widget.data![0];
     // print("Hello restult ${widget.result.toString()}");
     super.initState();
   }
 
   Future getUpdateDatabyId() async {
-    setState(() async {
-      updateStatusData =
-          await ApiService().updateStatus(indexId, widget.result.toString());
-    });
+    print(" Id and refcode : ${indexId} and ${refCodeController.text}");
+    print("Hello restult ${updateStatusData?.data?.locationStatus}");
+    updateStatusData =
+        await ApiService().updateStatus(indexId, refCodeController.text);
   }
 
   @override
@@ -63,6 +64,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                 ),
                 TextFormField(
                   initialValue: widget.result != '' ? widget.result : '',
+                  controller: refCodeController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Reference Number',
@@ -108,9 +110,10 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xff950101),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         // ApiService().updateStatus(indexId, widget.result);
-                        getUpdateDatabyId();
+                        await getUpdateDatabyId();
+                        setState(() {});
                       },
                       child: Text("Update"),
                     ),

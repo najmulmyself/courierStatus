@@ -41,15 +41,19 @@ class ApiService {
 
   Future updateStatus(id, refCode) async {
     final token = await GetToken().getToken();
-    final url =
-        Uri.parse(baseUrl + "update-lot-status/" + id + "/" + refCode + "/");
+    print("id is : ${id}");
+    print("ref is : ${refCode}");
+    final url = Uri.parse(
+        baseUrl + "update-lot-status/" + id.toString() + "/" + refCode + "/");
+    print(url);
+
     final response = await http.get(url, headers: {
       "Authorization": "Bearer $token",
     });
     if (response.statusCode == 200) {
       print("Update Status Happend");
-      
-    return UpdateStatus.fromJson(jsonDecode(response.body));
+
+      return UpdateStatus.fromJson(jsonDecode(response.body));
     } else {
       print("Error");
     }
