@@ -53,83 +53,84 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
           'Update Lot Status',
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Update Lot Status",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      widget.result = value;
-                    });
-                  },
-                  initialValue: widget.result != '' ? widget.result : '',
-                  // controller: refCodeController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Reference Number',
-                    suffixIcon: GestureDetector(
-                      child: Icon(Icons.camera_alt),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ScanCode()));
-                      },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Update Lot Status",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DropdownButton(
-                      value: newValue,
-                      hint:
-                          Text('Select Status'), // uNderprocessing - Bangladesh
-                      items: widget.data!.map(
-                        (Datum item) {
-                          return DropdownMenuItem<Datum>(
-                            child:
-                                Text("${item.name} - ${item.country!.name!} "),
-                            value: item,
-                          );
+                  SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        widget.result = value;
+                      });
+                    },
+                    initialValue: widget.result != '' ? widget.result : '',
+                    // controller: refCodeController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Reference Number',
+                      suffixIcon: GestureDetector(
+                        child: Icon(Icons.camera_alt),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScanCode()));
                         },
-                      ).toList(),
-                      onChanged: (Datum? v) {
-                        setState(() {
-                          newValue = v;
-                          indexId = v?.id;
-                          // print("Hello: $index  and ${v?.id}");
-                        });
-                      },
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xff950101),
                       ),
-                      onPressed: () async {
-                        // ApiService().updateStatus(indexId, widget.result);
-                        UpdateStatus dataContent = await getUpdateDatabyId();
-                        setState(() {
-                          // if(dataRow.contains(dataContent.data!.reference  ))
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DropdownButton(
+                        value: newValue,
+                        hint: Text(
+                            'Select Status'), // uNderprocessing - Bangladesh
+                        items: widget.data!.map(
+                          (Datum item) {
+                            return DropdownMenuItem<Datum>(
+                              child: Text(
+                                  "${item.name} - ${item.country!.name!} "),
+                              value: item,
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (Datum? v) {
+                          setState(() {
+                            newValue = v;
+                            indexId = v?.id;
+                            // print("Hello: $index  and ${v?.id}");
+                          });
+                        },
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xff950101),
+                        ),
+                        onPressed: () async {
+                          // ApiService().updateStatus(indexId, widget.result);
+                          UpdateStatus dataContent = await getUpdateDatabyId();
+                          setState(() {
+                            // if(dataRow.contains(dataContent.data!.reference  ))
 
-                          if (dataRow.isNotEmpty) {
+                            // if (dataRow.isNotEmpty) {
                             // for (int i = 0; i < dataRow.length; i++) {
                             //   print(
                             //       "rrrrrrrrrrrrrrrrr ${dataRow[i].data!.reference}");
@@ -150,101 +151,103 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                             //   }
                             // }
 
-                            if ((dataRow.singleWhere(
-                                    (it) =>
-                                        it.data!.reference ==
-                                        dataContent.data!.reference,
-                                    orElse: () {
-                                  return dataContent;
-                                })) !=
-                                null) {
-                              setState(() {
-                                dataRow.removeAt(dataRow.indexWhere((element) =>
-                                    element.data!.reference ==
-                                    dataContent.data!.reference));
-                                dataRow.add(dataContent);
-                              });
-                            } else {
-                              setState(() {
-                                dataRow.add(dataContent);
-                              });
-                              print('Added!');
-                            }
-                          } else {
+                            //   if ((dataRow.singleWhere(
+                            //           (it) =>
+                            //               it.data!.reference ==
+                            //               dataContent.data!.reference,
+                            //           orElse: () {
+                            //         return dataContent;
+                            //       })) !=
+                            //       null) {
+                            //     setState(() {
+                            //       dataRow.removeAt(dataRow.indexWhere((element) =>
+                            //           element.data!.reference ==
+                            //           dataContent.data!.reference));
+                            //       dataRow.add(dataContent);
+                            //     });
+                            //   } else {
+                            //     setState(() {
+                            //       dataRow.add(dataContent);
+                            //     });
+                            //     print('Added!');
+                            //   }
+                            // } else {
+                            // }
+                            // refCodeController.text = '';
                             dataRow.add(dataContent);
-                          }
-                          // refCodeController.text = '';
-                        });
-                      },
-                      child: Text("Update"),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              showBottomBorder: true,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              columns: [
-                DataColumn(
-                  label: Text("Reference"),
-                ),
-                DataColumn(
-                  label: Text("Location Status"),
-                ),
-                DataColumn(
-                  label: Text("Lots of"),
-                ),
-              ],
-              rows: dataRow.isNotEmpty
-                  ? dataRow
-                      .map((e) => DataRow(
-                            cells: [
-                              DataCell(Text("${e.data?.reference.toString()}")),
-                              DataCell(Text("${e.data?.locationStatus}")),
-                              DataCell(Text("${e.data?.booking}")),
-                            ],
-                          ))
-                      .toList()
-                  : [
-                      DataRow(cells: [
-                        DataCell(Text("-")),
-                        DataCell(Text("-")),
-                        DataCell(Text("-")),
-                      ])
+                          });
+                        },
+                        child: Text("Update"),
+                      ),
                     ],
-              // rows: [
-              //   updateStatusData?.data != null
-              //       ?
-              //       DataRow(
-              //           cells: [
-              //             DataCell(Text(
-              //                 "${updateStatusData?.data?.reference.toString()}")),
-              //             DataCell(Text(
-              //                 "${updateStatusData?.data?.locationStatus}")),
-              //             DataCell(Text("${updateStatusData?.data?.booking}")),
-              //           ],
-              //         )
-              //       : DataRow(
-              //           cells: listRow!,
-              //         ),
-              //   // DataRow(
-              //   //   cells: [
-              //   //     DataCell(Text(
-              //   //         "${updateStatusData?.data?.reference.toString()}")),
-              //   //     DataCell(Text("${updateStatusData?.data?.locationStatus}")),
-              //   //     DataCell(Text("${updateStatusData?.data?.booking}")),
-              //   //   ],
-              //   // )
-              // ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                showBottomBorder: true,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                ),
+                columns: [
+                  DataColumn(
+                    label: Text("Reference"),
+                  ),
+                  DataColumn(
+                    label: Text("Location Status"),
+                  ),
+                  DataColumn(
+                    label: Text("Lots of"),
+                  ),
+                ],
+                rows: dataRow.isNotEmpty
+                    ? dataRow
+                        .map((e) => DataRow(
+                              cells: [
+                                DataCell(
+                                    Text("${e.data?.reference.toString()}")),
+                                DataCell(Text("${e.data?.locationStatus}")),
+                                DataCell(Text("${e.data?.booking}")),
+                              ],
+                            ))
+                        .toList()
+                    : [
+                        DataRow(cells: [
+                          DataCell(Text("-")),
+                          DataCell(Text("-")),
+                          DataCell(Text("-")),
+                        ])
+                      ],
+                // rows: [
+                //   updateStatusData?.data != null
+                //       ?
+                //       DataRow(
+                //           cells: [
+                //             DataCell(Text(
+                //                 "${updateStatusData?.data?.reference.toString()}")),
+                //             DataCell(Text(
+                //                 "${updateStatusData?.data?.locationStatus}")),
+                //             DataCell(Text("${updateStatusData?.data?.booking}")),
+                //           ],
+                //         )
+                //       : DataRow(
+                //           cells: listRow!,
+                //         ),
+                //   // DataRow(
+                //   //   cells: [
+                //   //     DataCell(Text(
+                //   //         "${updateStatusData?.data?.reference.toString()}")),
+                //   //     DataCell(Text("${updateStatusData?.data?.locationStatus}")),
+                //   //     DataCell(Text("${updateStatusData?.data?.booking}")),
+                //   //   ],
+                //   // )
+                // ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
