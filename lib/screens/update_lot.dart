@@ -10,7 +10,7 @@ import '../Model/update_lot_model.dart';
 class UpdateLotStatus extends StatefulWidget {
   UpdateLotStatus({this.result, this.data});
 
-  String? result;
+  String? result = '';
   List<Datum>? data;
 
   @override
@@ -21,7 +21,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Datum? newValue;
   int? indexId;
   UpdateStatus? updateStatusData;
-  // TextEditingController refCodeController = TextEditingController();
+
+  TextEditingController refCodeController = TextEditingController();
 
   List<DataCell>? listRow = [
     DataCell(Text("-")),
@@ -77,18 +78,24 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                         widget.result = value;
                       });
                     },
-                    initialValue: widget.result != '' ? widget.result : '',
-                    // controller: refCodeController,
+                    initialValue: widget.result,
+                    controller: refCodeController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Reference Number',
                       suffixIcon: GestureDetector(
                         child: Icon(Icons.camera_alt),
-                        onTap: () {
-                          Navigator.push(
+                        onTap: () async {
+                          var scanResult = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ScanCode()));
+
+                          print("result-ashif: ${scanResult.toString()}");
+
+                          if (scanResult != null) {
+                            refCodeController.text = scanResult.toString();
+                          }
                         },
                       ),
                     ),

@@ -71,14 +71,15 @@ class _ScanCodeState extends State<ScanCode> {
                                 newResult = refDataSplit[1];
                                 print(
                                     "newResurrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrlt : $newResult");
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => UpdateLotStatus(
-                                      result: newResult.toString(),
-                                    ),
-                                  ),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => UpdateLotStatus(
+                                //       result: newResult.toString(),
+                                //     ),
+                                //   ),
+                                // );
+                                Navigator.pop(context,newResult);
                               },
                               child: Text("Done"),
                             ),
