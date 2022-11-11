@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:courier_status/screens/shipment.dart';
 import 'package:courier_status/screens/update_lot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -73,9 +74,9 @@ class _ScanCodeState extends State<ScanCode> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => UpdateLotStatus(
-                                      result: newResult.toString(),
-                                    ),
+                                    builder: (context) => Shipment(
+                                        // result: newResult.toString(),
+                                        ),
                                   ),
                                 );
                               },
