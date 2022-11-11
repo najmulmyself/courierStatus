@@ -42,8 +42,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Future<UpdateStatus> getUpdateDatabyId() async {
     // print(" Id and refcode : ${indexId} and ${widget.result}");
     // print("Hello restult ${updateStatusData?.data?.locationStatus}");
-    return updateStatusData =
-        await ApiService().updateStatus(indexId, widget.result.toString());
+    return updateStatusData = await ApiService()
+        .updateStatus(indexId, refCodeController.text.toString());
   }
 
   @override
@@ -73,11 +73,11 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                     height: 30,
                   ),
                   TextFormField(
-                    onChanged: (value) {
-                      setState(() {
-                        widget.result = value;
-                      });
-                    },
+                    // onChanged: (value) {
+                    //   setState(() {
+                    //     widget.result = value.toString();
+                    //   });
+                    // },
                     initialValue: widget.result,
                     controller: refCodeController,
                     decoration: InputDecoration(

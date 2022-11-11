@@ -33,7 +33,7 @@ class _ScanCodeState extends State<ScanCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Test'),
+        title: Text('Scan QR Code'),
       ),
       body: Column(
         children: <Widget>[
@@ -79,7 +79,7 @@ class _ScanCodeState extends State<ScanCode> {
                                 //     ),
                                 //   ),
                                 // );
-                                Navigator.pop(context,newResult);
+                                Navigator.pop(context, newResult);
                               },
                               child: Text("Done"),
                             ),
