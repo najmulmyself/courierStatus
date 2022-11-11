@@ -74,9 +74,9 @@ class _ScanCodeState extends State<ScanCode> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Shipment(
-                                        // result: newResult.toString(),
-                                        ),
+                                    builder: (context) => UpdateLotStatus(
+                                      result: newResult.toString(),
+                                    ),
                                   ),
                                 );
                               },
