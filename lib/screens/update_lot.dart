@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
+import 'package:courier_status/Model/not_found_model.dart';
 import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
@@ -21,6 +22,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
   Datum? newValue;
   int? indexId;
   UpdateStatus? updateStatusData;
+  Function? onFail;
 
   TextEditingController refCodeController = TextEditingController();
 
@@ -43,7 +45,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
     // print(" Id and refcode : ${indexId} and ${widget.result}");
     // print("Hello restult ${updateStatusData?.data?.locationStatus}");
     return updateStatusData = await ApiService()
-        .updateStatus(indexId, refCodeController.text.toString());
+        .updateStatus(indexId, refCodeController.text.toString(), () {
+      ScaffoldMessenger(child: Text("Hello"));
+    });
   }
 
   @override
@@ -132,7 +136,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           primary: Color(0xff950101),
                         ),
                         onPressed: () async {
-                          // ApiService().updateStatus(indexId, widget.result);
+                          // NotFound notFound = await ApiService()
+                          //     .updateStatus(indexId, refCodeController.text);
                           UpdateStatus dataContent = await getUpdateDatabyId();
                           setState(() {
                             // if(dataRow.contains(dataContent.data!.reference  ))

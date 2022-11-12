@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'dart:convert';
+import 'package:courier_status/Model/not_found_model.dart';
 import 'package:courier_status/Model/testData.dart';
 import 'package:courier_status/Model/update_lot_model.dart';
 import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/setToken.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -39,7 +41,7 @@ class ApiService {
     return datares;
   }
 
-  Future updateStatus(id, refCode) async {
+  Future updateStatus(id, refCode, Function onFail) async {
     final token = await GetToken().getToken();
     print("id is : ${id}");
     print("ref is : ${refCode}");
@@ -54,8 +56,13 @@ class ApiService {
       print("Update Status Happend");
 
       return UpdateStatus.fromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 500 || response.statusCode == 501) {
+      return ScaffoldMessenger(child: Text('Hello'));
     } else {
-      print("Error");
+      // return NotFound.fromJson(jsonDecode(response.body));
+      // throw NotFound.fromJson(jsonDecode(response.body));
+      var message = jsonDecode(response.body)["errors"][0]["non_field_errors"];
+      throw onFail(message);
     }
   }
 }
