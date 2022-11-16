@@ -4,7 +4,6 @@ import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
-
 import '../Model/update_lot_model.dart';
 
 class UpdateLotStatus extends StatefulWidget {
