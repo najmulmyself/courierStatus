@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
-import 'package:courier_status/Model/not_found_model.dart';
 import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
@@ -36,14 +35,12 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
 
   @override
   void initState() {
-    // newValue = widget.data![0];
-    // print("Hello restult ${widget.result.toString()}");
+
     super.initState();
   }
 
   Future<UpdateStatus> getUpdateDatabyId() async {
-    // print(" Id and refcode : ${indexId} and ${widget.result}");
-    // print("Hello restult ${updateStatusData?.data?.locationStatus}");
+
     return updateStatusData = await ApiService()
         .updateStatus(indexId, refCodeController.text.toString(), () {
       ScaffoldMessenger(child: Text("Hello"));
@@ -77,11 +74,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                     height: 30,
                   ),
                   TextFormField(
-                    // onChanged: (value) {
-                    //   setState(() {
-                    //     widget.result = value.toString();
-                    //   });
-                    // },
+
                     initialValue: widget.result,
                     controller: refCodeController,
                     decoration: InputDecoration(
@@ -95,7 +88,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                               MaterialPageRoute(
                                   builder: (context) => ScanCode()));
 
-                          print("result-ashif: ${scanResult.toString()}");
+                          // print("result-ashif: ${scanResult.toString()}");
 
                           if (scanResult != null) {
                             refCodeController.text = scanResult.toString();
@@ -127,7 +120,6 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           setState(() {
                             newValue = v;
                             indexId = v?.id;
-                            // print("Hello: $index  and ${v?.id}");
                           });
                         },
                       ),
@@ -136,56 +128,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           primary: Color(0xff950101),
                         ),
                         onPressed: () async {
-                          // NotFound notFound = await ApiService()
-                          //     .updateStatus(indexId, refCodeController.text);
+
                           UpdateStatus dataContent = await getUpdateDatabyId();
                           setState(() {
-                            // if(dataRow.contains(dataContent.data!.reference  ))
-
-                            // if (dataRow.isNotEmpty) {
-                            // for (int i = 0; i < dataRow.length; i++) {
-                            //   print(
-                            //       "rrrrrrrrrrrrrrrrr ${dataRow[i].data!.reference}");
-                            //   print(i);
-                            //   print(
-                            //       "sssssssssssssssss ${dataContent.data!.reference}");
-                            //   if (dataRow[i].data!.reference ==
-                            //       dataContent.data!.reference) {
-                            //     setState(() {
-                            //       dataRow.removeAt(dataRow.indexWhere(
-                            //           (element) =>
-                            //               element.data!.reference ==
-                            //               dataContent.data!.reference));
-                            //       dataRow.add(dataContent);
-                            //     });
-                            //   } else {
-                            //     dataRow.add(dataContent);
-                            //   }
-                            // }
-
-                            //   if ((dataRow.singleWhere(
-                            //           (it) =>
-                            //               it.data!.reference ==
-                            //               dataContent.data!.reference,
-                            //           orElse: () {
-                            //         return dataContent;
-                            //       })) !=
-                            //       null) {
-                            //     setState(() {
-                            //       dataRow.removeAt(dataRow.indexWhere((element) =>
-                            //           element.data!.reference ==
-                            //           dataContent.data!.reference));
-                            //       dataRow.add(dataContent);
-                            //     });
-                            //   } else {
-                            //     setState(() {
-                            //       dataRow.add(dataContent);
-                            //     });
-                            //     print('Added!');
-                            //   }
-                            // } else {
-                            // }
-                            // refCodeController.text = '';
                             dataRow.add(dataContent);
                           });
                         },
@@ -232,30 +177,6 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           DataCell(Text("-")),
                         ])
                       ],
-                // rows: [
-                //   updateStatusData?.data != null
-                //       ?
-                //       DataRow(
-                //           cells: [
-                //             DataCell(Text(
-                //                 "${updateStatusData?.data?.reference.toString()}")),
-                //             DataCell(Text(
-                //                 "${updateStatusData?.data?.locationStatus}")),
-                //             DataCell(Text("${updateStatusData?.data?.booking}")),
-                //           ],
-                //         )
-                //       : DataRow(
-                //           cells: listRow!,
-                //         ),
-                //   // DataRow(
-                //   //   cells: [
-                //   //     DataCell(Text(
-                //   //         "${updateStatusData?.data?.reference.toString()}")),
-                //   //     DataCell(Text("${updateStatusData?.data?.locationStatus}")),
-                //   //     DataCell(Text("${updateStatusData?.data?.booking}")),
-                //   //   ],
-                //   // )
-                // ],
               ),
             ),
           ],

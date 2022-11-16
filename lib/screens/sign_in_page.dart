@@ -6,7 +6,6 @@ import 'package:courier_status/apiService/setToken.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../apiService/lot_status_view.dart';
 
 class SignInPage extends StatelessWidget {
   final emailController = TextEditingController();
@@ -86,7 +85,6 @@ class SignInPage extends StatelessWidget {
               ),
               onPressed: () {
                 signIn(context);
-                // Navigator.pushNamed(context, '/dashboard');
               },
               child: Text('Login'),
             ),

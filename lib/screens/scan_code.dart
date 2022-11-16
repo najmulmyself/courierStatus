@@ -2,9 +2,7 @@
 
 import 'dart:io';
 
-import 'package:courier_status/screens/shipment.dart';
-import 'package:courier_status/screens/update_lot.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -69,16 +67,6 @@ class _ScanCodeState extends State<ScanCode> {
                                 dynamic refData = dataCommaSplit[0];
                                 dynamic refDataSplit = refData.split(":");
                                 newResult = refDataSplit[1];
-                                print(
-                                    "newResurrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrlt : $newResult");
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => UpdateLotStatus(
-                                //       result: newResult.toString(),
-                                //     ),
-                                //   ),
-                                // );
                                 Navigator.pop(context, newResult);
                               },
                               child: Text("Done"),

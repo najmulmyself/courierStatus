@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:courier_status/component/drawer_content.dart';
-import 'package:courier_status/screens/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 class DashBoard extends StatelessWidget {

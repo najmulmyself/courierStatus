@@ -70,10 +70,7 @@ class DrawerContent extends StatelessWidget {
             ),
             title: Text('Profile'),
             onTap: () {
-              // Update the state of the app.
-              // // ...
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => UpdateLotStatus()));
+
             },
           ),
         ),
