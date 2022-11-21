@@ -34,12 +34,10 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
   Future<UpdateStatus> getUpdateDatabyId() async {
-
     return updateStatusData = await ApiService()
         .updateStatus(indexId, refCodeController.text.toString(), () {
       ScaffoldMessenger(child: Text("Hello"));
@@ -73,7 +71,6 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                     height: 30,
                   ),
                   TextFormField(
-
                     initialValue: widget.result,
                     controller: refCodeController,
                     decoration: InputDecoration(
@@ -127,7 +124,6 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           primary: Color(0xff950101),
                         ),
                         onPressed: () async {
-
                           UpdateStatus dataContent = await getUpdateDatabyId();
                           setState(() {
                             dataRow.add(dataContent);
@@ -143,6 +139,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
+                sortAscending: false,
                 showBottomBorder: true,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade300),
