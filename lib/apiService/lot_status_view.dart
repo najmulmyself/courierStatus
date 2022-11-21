@@ -30,7 +30,7 @@ class ApiService {
     return datares;
   }
 
-  Future updateStatus(id, refCode, Function onFail) async {
+  Future<UpdateStatus> updateStatus(id, refCode) async {
     final token = await GetToken().getToken();
     print("id is : ${id}");
     print("ref is : ${refCode}");
@@ -47,11 +47,16 @@ class ApiService {
       return UpdateStatus.fromJson(jsonDecode(response.body));
 
       /// Wont work from here | need to fix
-    } else if (response.statusCode == 500 || response.statusCode == 501) {
-      return ScaffoldMessenger(child: Text('Hello'));
-    } else {
-      var message = jsonDecode(response.body)["errors"][0]["non_field_errors"];
-      throw onFail(message);
+    } else{
+      var message = jsonDecode(response.body)["errors"][0]["non_field_errors"]["message"];
+      return UpdateStatus.withError(message.toString(), response.statusCode);
     }
+
+    // else if (response.statusCode == 500 || response.statusCode == 501) {
+    //   return ScaffoldMessenger(child: Text('Hello'));
+    // } else {
+    //   var message = jsonDecode(response.body)["errors"][0]["non_field_errors"];
+    //   throw onFail(message);
+    // }
   }
 }

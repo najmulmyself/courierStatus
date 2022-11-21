@@ -39,9 +39,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
 
   Future<UpdateStatus> getUpdateDatabyId() async {
     return updateStatusData = await ApiService()
-        .updateStatus(indexId, refCodeController.text.toString(), () {
-      ScaffoldMessenger(child: Text("Hello"));
-    });
+        .updateStatus(indexId, refCodeController.text.toString());
   }
 
   @override
@@ -93,11 +91,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: 30),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       DropdownButton(
                         value: newValue,
@@ -107,7 +103,11 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           (Datum item) {
                             return DropdownMenuItem<Datum>(
                               child: Text(
-                                  "${item.name} - ${item.country!.name!} "),
+                                "${item.name} - ${item.country!.name!} ",
+                                style: TextStyle(
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ),
                               value: item,
                             );
                           },
@@ -119,17 +119,27 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           });
                         },
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color(0xff950101),
+                      Expanded(
+                        child: Container(
+                          width: 40,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff950101),
+                            ),
+                            onPressed: () async {
+                              UpdateStatus dataContent =
+                                  await getUpdateDatabyId();
+                              print("messege: ${updateStatusData?.message}");
+                              print(
+                                  "code: ${updateStatusData?.responseStatusCode}");
+
+                              setState(() {
+                                dataRow.add(dataContent);
+                              });
+                            },
+                            child: Text("Update"),
+                          ),
                         ),
-                        onPressed: () async {
-                          UpdateStatus dataContent = await getUpdateDatabyId();
-                          setState(() {
-                            dataRow.add(dataContent);
-                          });
-                        },
-                        child: Text("Update"),
                       ),
                     ],
                   ),
