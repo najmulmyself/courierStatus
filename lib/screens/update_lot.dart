@@ -132,10 +132,21 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                               print("messege: ${updateStatusData?.message}");
                               print(
                                   "code: ${updateStatusData?.responseStatusCode}");
+                              print(dataContent.responseStatusCode);
 
-                              setState(() {
-                                dataRow.add(dataContent);
-                              });
+                              if (dataContent.responseStatusCode == 200) {
+                                setState(() {
+                                  dataRow.add(dataContent);
+                                });
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content:
+                                        Text(dataContent.message.toString()),
+                                  ),
+                                );
+                              }
                             },
                             child: Text("Update"),
                           ),
