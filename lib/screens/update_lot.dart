@@ -124,7 +124,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           width: 40,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff950101),
+                              // back: Color(0xff950101),
+                              // backgroundColor: Color(0xff950101),
+                              primary: Color(0xff950101),
                             ),
                             onPressed: () async {
                               UpdateStatus dataContent =
@@ -160,7 +162,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
-                sortAscending: false,
+                sortAscending: true,
+                sortColumnIndex: 0,
                 showBottomBorder: true,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade300),
