@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:courier_status/Model/shipment_data_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +12,16 @@ class Shipment extends StatefulWidget {
 }
 
 class _ShipmentState extends State<Shipment> {
-  // Future getShipmentData(){
-  //   return
-  // }
+  ShipmentData? shipmentData;
+  Future<ShipmentData?> getShipmentData() async {
+    shipmentData = await ApiService().getShipmentData();
+    return shipmentData;
+  }
+
   @override
   void initState() {
     super.initState();
-    ApiService().getShipmentData();
+    getShipmentData();
   }
 
   @override
@@ -121,6 +125,7 @@ class _ShipmentState extends State<Shipment> {
               ],
             ),
           ),
+          // Text(shipmentData!.data![0].id.toString()),
         ],
       ),
     );

@@ -63,17 +63,17 @@ class ApiService {
 
   //getShipment Data
 
-  Future getShipmentData() async {
+  Future<ShipmentData?> getShipmentData() async {
     final token = await GetToken().getToken();
     final url = Uri.parse(baseUrl + "shipments/");
     final response = await http.get(url, headers: {
       "Authorization": "Bearer $token",
     });
     if (response.statusCode == 200) {
-      print("Shipment Data Happend");
-      return ShipmentData.fromJson(jsonDecode(response.body));
-    } else {
-      print("Error");
-    }
+        print("Shipment Data Happend");
+        return ShipmentData.fromJson(jsonDecode(response.body));
+      } else {
+        print("Error");
+      }
   }
 }
