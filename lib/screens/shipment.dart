@@ -1,9 +1,24 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:flutter/material.dart';
 
-class Shipment extends StatelessWidget {
+class Shipment extends StatefulWidget {
   const Shipment({Key? key}) : super(key: key);
+
+  @override
+  State<Shipment> createState() => _ShipmentState();
+}
+
+class _ShipmentState extends State<Shipment> {
+  // Future getShipmentData(){
+  //   return
+  // }
+  @override
+  void initState() {
+    super.initState();
+    ApiService().getShipmentData();
+  }
 
   @override
   Widget build(BuildContext context) {
