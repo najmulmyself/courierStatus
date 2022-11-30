@@ -92,8 +92,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                     ),
                   ),
                   SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DropdownButton(
                         value: newValue,
@@ -105,8 +105,8 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                               child: Text(
                                 "${item.name} - ${item.country!.name!} ",
                                 style: TextStyle(
-                                  overflow: TextOverflow.fade,
-                                ),
+                                    // overflow: TextOverflow.fade,
+                                    ),
                               ),
                               value: item,
                             );
@@ -121,7 +121,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       ),
                       Expanded(
                         child: Container(
-                          width: 40,
+                          // width: 100,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               // back: Color(0xff950101),
