@@ -22,6 +22,7 @@ class _ShipmentState extends State<Shipment> {
   void initState() {
     super.initState();
     getShipmentData();
+    print("init called");
   }
 
   @override
@@ -84,45 +85,57 @@ class _ShipmentState extends State<Shipment> {
                   label: Text("Shipment No"),
                 ),
               ],
-              rows: [
-                DataRow(
-                  cells: [
-                    DataCell(Text('1')),
-                    DataCell(
-                      Center(
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.black38,
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
+              rows: shipmentData!.data!.isNotEmpty
+                  ? shipmentData!.data!
+                      .map(
+                        (e) => DataRow(
+                          cells: [
+                            DataCell(
+                              Text(e.id.toString()),
+                            ),
+                            DataCell(
+                              Center(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      color: Colors.black38,
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      color: Colors.red,
+                                      child: Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            SizedBox(
-                              width: 10,
+                            DataCell(
+                              Text("${e.startDate} - ${e.endDate}"),
                             ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.red,
-                              child: Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
+                            DataCell(
+                              Text(e.freightCategory.toString()),
+                            ),
+                            DataCell(
+                              Text(e.shipmentNumber.toString()),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    DataCell(Text('Active')),
-                    DataCell(Text('-')),
-                    DataCell(Text('-')),
-                  ],
-                ),
-              ],
+                      )
+                      .toList()
+                  : [],
             ),
           ),
           // Text(shipmentData!.data![0].id.toString()),
@@ -131,3 +144,43 @@ class _ShipmentState extends State<Shipment> {
     );
   }
 }
+
+
+
+// DataRow(
+//                   cells: [
+//                     DataCell(Text('1')),
+//                     DataCell(
+//                       Center(
+//                         child: Row(
+//                           children: [
+//                             Container(
+//                               height: 40,
+//                               width: 40,
+//                               color: Colors.black38,
+//                               child: Icon(
+//                                 Icons.edit,
+//                                 color: Colors.white,
+//                               ),
+//                             ),
+//                             SizedBox(
+//                               width: 10,
+//                             ),
+//                             Container(
+//                               height: 40,
+//                               width: 40,
+//                               color: Colors.red,
+//                               child: Icon(
+//                                 Icons.delete,
+//                                 color: Colors.white,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                     DataCell(Text('Active')),
+//                     DataCell(Text('-')),
+//                     DataCell(Text('-')),
+//                   ],
+//                 ),
