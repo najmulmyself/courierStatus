@@ -51,10 +51,10 @@ class DrawerContent extends StatelessWidget {
             color: Colors.black,
           ),
           title: Text('Shipments'),
-          onTap: () {
+          onTap: () async {
             // Update the state of the app.
             // ...
-            Navigator.push(
+            await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => Shipment(),
@@ -69,9 +69,7 @@ class DrawerContent extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text('Profile'),
-            onTap: () {
-
-            },
+            onTap: () {},
           ),
         ),
         Center(
