@@ -25,57 +25,55 @@ class _ShipmentState extends State<Shipment> {
     print("2shipmentData");
 
     super.initState();
-    Timer(Duration(seconds: 2), () {
-      setState(() {
-        getShipmentData();
-      });
-    });
+    getShipmentData();
+    // Timer(Duration(seconds: 2), () {
+    //   setState(() {
+    //   });
+    // });
     print("init called");
   }
 
   @override
   Widget build(BuildContext context) {
     print("shipmentData");
-    return shipmentData == "null"
-        ? Scaffold(
-            body: CircularProgressIndicator(),
-          )
-        : Scaffold(
-            appBar: AppBar(
-              title: Text('Shipment'),
-            ),
-            body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Shipment'),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 10),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Shipment List"),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff950101),
+                      ),
+                      onPressed: () {},
+                      child: Row(
                         children: [
-                          Text("Shipment List"),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xff950101),
-                            ),
-                            onPressed: () {},
-                            child: Row(
-                              children: [
-                                Icon(Icons.add_box_rounded),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text("Create"),
-                              ],
-                            ),
+                          Icon(Icons.add_box_rounded),
+                          SizedBox(
+                            width: 5,
                           ),
+                          Text("Create"),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SingleChildScrollView(
+              ],
+            ),
+          ),
+          FutureBuilder<ShipmentData?>(
+              future: ApiService().getShipmentData(),
+              builder: (context, snapshot) {
+                return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
                     showBottomBorder: true,
@@ -99,8 +97,8 @@ class _ShipmentState extends State<Shipment> {
                         label: Text("Shipment No"),
                       ),
                     ],
-                    rows: shipmentData!.data != null
-                        ? shipmentData!.data!
+                    rows: snapshot.hasData
+                        ? snapshot.data!.data!
                             .map(
                               (e) => DataRow(
                                 cells: [
@@ -140,7 +138,7 @@ class _ShipmentState extends State<Shipment> {
                                     Text("${e.startDate} - ${e.endDate}"),
                                   ),
                                   DataCell(
-                                    Text(e.freightCategory.toString()),
+                                    Text("${e.freightCategory}"),
                                   ),
                                   DataCell(
                                     Text(e.shipmentNumber.toString()),
@@ -151,11 +149,12 @@ class _ShipmentState extends State<Shipment> {
                             .toList()
                         : [],
                   ),
-                ),
-                // Text(shipmentData!.data![0].id.toString()),
-              ],
-            ),
-          );
+                );
+              }),
+          // Text(shipmentData!.data![0].id.toString()),
+        ],
+      ),
+    );
   }
 }
 
