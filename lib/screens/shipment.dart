@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:courier_status/Model/shipment_data_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
+import 'package:courier_status/screens/shipment_add_lot.dart';
 import 'package:flutter/material.dart';
 
 class Shipment extends StatefulWidget {
@@ -114,7 +115,9 @@ class _ShipmentState extends State<Shipment> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ScanCode(),
+                                                    ShipmentAddLot(
+                                                  id: e.id.toString(),
+                                                ),
                                               ),
                                             );
                                           },
