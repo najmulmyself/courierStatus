@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
+import 'package:courier_status/Model/shipment_lot-view_model.dart';
 import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
 import 'package:courier_status/screens/scan_code.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../Model/update_lot_model.dart';
 
 class ShipmentAddLot extends StatefulWidget {
-  ShipmentAddLot({this.result, this.data,this.id});
+  ShipmentAddLot({this.result, this.data, this.id});
 
   String? result = '';
   List<Datum>? data;
@@ -34,11 +35,18 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
     DataCell(Text("-")),
   ];
 
-  List<UpdateStatus> dataRow = [];
+  ShipmentLotViewModel ?dataRow ;
+   Future<ShipmentLotViewModel?> getShipmentLotView(id) async {
+    dataRow = await ApiService().getLotViewData(id);
+    return null;
+  
+
+  }
 
   @override
   void initState() {
     super.initState();
+    getShipmentLotView(widget.id);
   }
 
   Future<UpdateStatus> getUpdateDatabyId() async {
@@ -104,9 +112,7 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                         // backgroundColor: Color(0xff950101),
                         primary: Color(0xff950101),
                       ),
-                      onPressed: ()  {
-                       
-                      },
+                      onPressed: () {},
                       child: Text("Add"),
                     ),
                   ),

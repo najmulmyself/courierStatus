@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:courier_status/Model/shipment_data_model.dart';
+import 'package:courier_status/Model/shipment_lot-view_model.dart';
 import 'package:courier_status/Model/update_lot_model.dart';
 import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/setToken.dart';
@@ -70,10 +71,22 @@ class ApiService {
       "Authorization": "Bearer $token",
     });
     if (response.statusCode == 200) {
-        print("Shipment Data Happend");
-        return ShipmentData.fromJson(jsonDecode(response.body));
-      } else {
-        print("Error");
-      }
+      print("Shipment Data Happend");
+      return ShipmentData.fromJson(jsonDecode(response.body));
+    } else {
+      print("Error");
+    }
+  }
+
+  Future<ShipmentLotViewModel?> getLotViewData(id) async {
+    final token = await GetToken().getToken();
+    final url = Uri.parse(baseUrl + "shipment/lot-view/" + id + "/");
+    final response = await http.get(url, headers: {
+      "Authorization": "Bearer $token",
+    });
+    if (response.statusCode == 200) {
+      print("lotViewSuccess");
+      return ShipmentLotViewModel.fromJson(jsonDecode(response.body));
+    }
   }
 }
