@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:courier_status/Model/shipment_data_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
+import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
 class Shipment extends StatefulWidget {
@@ -14,24 +15,20 @@ class Shipment extends StatefulWidget {
 }
 
 class _ShipmentState extends State<Shipment> {
-  ShipmentData? shipmentData;
-  Future<ShipmentData?> getShipmentData() async {
-    shipmentData = await ApiService().getShipmentData();
-    return shipmentData;
-  }
+  // ShipmentData? shipmentData;
+  // Future<ShipmentData?> getShipmentData() async {
+  //   shipmentData = await ApiService().getShipmentData();
+  //   return shipmentData;
+  // }
 
-  @override
-  void initState() {
-    print("2shipmentData");
+  // @override
+  // void initState() {
+  //   print("2shipmentData");
 
-    super.initState();
-    getShipmentData();
-    // Timer(Duration(seconds: 2), () {
-    //   setState(() {
-    //   });
-    // });
-    print("init called");
-  }
+  //   super.initState();
+  //   getShipmentData();
+
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,45 +68,57 @@ class _ShipmentState extends State<Shipment> {
             ),
           ),
           FutureBuilder<ShipmentData?>(
-              future: ApiService().getShipmentData(),
-              builder: (context, snapshot) {
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    showBottomBorder: true,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
+            future: ApiService().getShipmentData(),
+            builder: (context, snapshot) {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  showBottomBorder: true,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  columns: [
+                    DataColumn(
+                      label: Text("No"),
                     ),
-                    columns: [
-                      DataColumn(
-                        label: Text("No"),
-                      ),
-                      DataColumn(
-                        label: Text("Action"),
-                      ),
-                      DataColumn(
-                        label: Text("Date"),
-                      ),
-                      DataColumn(
-                        label: Text("Category"),
-                      ),
-                      DataColumn(
-                        label: Text("Shipment No"),
-                      ),
-                    ],
-                    rows: snapshot.hasData
-                        ? snapshot.data!.data!
-                            .map(
-                              (e) => DataRow(
-                                cells: [
-                                  DataCell(
-                                    Text(e.id.toString()),
+                    DataColumn(
+                      label: Text("Action"),
+                    ),
+                    DataColumn(
+                      label: Text("Date"),
+                    ),
+                    DataColumn(
+                      label: Text("Category"),
+                    ),
+                    DataColumn(
+                      label: Text("Shipment No"),
+                    ),
+                  ],
+                  rows: snapshot.hasData
+                      ? snapshot.data!.data!
+                          .map(
+                            (e) => DataRow(
+                              cells: [
+                                DataCell(
+                                  Text(
+                                    e.id.toString(),
                                   ),
-                                  DataCell(
-                                    Center(
-                                      child: Row(
-                                        children: [
-                                          Container(
+                                ),
+                                DataCell(
+                                  Center(
+                                    child: Row(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ScanCode(),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
                                             height: 40,
                                             width: 40,
                                             color: Colors.black38,
@@ -118,40 +127,41 @@ class _ShipmentState extends State<Shipment> {
                                               color: Colors.white,
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 10,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Container(
+                                          height: 40,
+                                          width: 40,
+                                          color: Colors.red,
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: Colors.white,
                                           ),
-                                          Container(
-                                            height: 40,
-                                            width: 40,
-                                            color: Colors.red,
-                                            child: Icon(
-                                              Icons.delete,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  DataCell(
-                                    Text("${e.startDate} - ${e.endDate}"),
-                                  ),
-                                  DataCell(
-                                    Text("${e.freightCategory}"),
-                                  ),
-                                  DataCell(
-                                    Text(e.shipmentNumber.toString()),
-                                  ),
-                                ],
-                              ),
-                            )
-                            .toList()
-                        : [],
-                  ),
-                );
-              }),
-          // Text(shipmentData!.data![0].id.toString()),
+                                ),
+                                DataCell(
+                                  Text("${e.startDate} - ${e.endDate}"),
+                                ),
+                                DataCell(
+                                  Text("${e.freightCategory}"),
+                                ),
+                                DataCell(
+                                  Text(e.shipmentNumber.toString()),
+                                ),
+                              ],
+                            ),
+                          )
+                          .toList()
+                      : [],
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
