@@ -35,19 +35,17 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
     DataCell(Text("-")),
   ];
 
-  ShipmentLotViewModel ?dataRow ;
-   Future<ShipmentLotViewModel?> getShipmentLotView(id) async {
-    dataRow = await ApiService().getLotViewData(id);
-    return null;
-  
+  // ShipmentLotViewModel? dataRow;
+  // Future<ShipmentLotViewModel?> getShipmentLotView(id) async {
+  //   dataRow = await ApiService().getLotViewData(id);
+  //   return dataRow;
+  // }
 
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getShipmentLotView(widget.id);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getShipmentLotView(widget.id);
+  // }
 
   Future<UpdateStatus> getUpdateDatabyId() async {
     return updateStatusData = await ApiService()
@@ -119,46 +117,54 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                 ],
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                sortAscending: true,
-                sortColumnIndex: 0,
-                showBottomBorder: true,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                ),
-                columns: [
-                  DataColumn(
-                    label: Text("Reference"),
-                  ),
-                  DataColumn(
-                    label: Text("Location Status"),
-                  ),
-                  DataColumn(
-                    label: Text("Lots of"),
-                  ),
-                ],
-                rows: dataRow.isNotEmpty
-                    ? dataRow
-                        .map((e) => DataRow(
+            FutureBuilder<ShipmentLotViewModel?>(
+              future: ApiService().getLotViewData(widget.id),
+              builder: (context, AsyncSnapshot snapshot) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    sortAscending: true,
+                    sortColumnIndex: 0,
+                    showBottomBorder: true,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
+                    columns: [
+                      DataColumn(
+                        label: Text("Reference"),
+                      ),
+                      DataColumn(
+                        label: Text("Location Status"),
+                      ),
+                      DataColumn(
+                        label: Text("Lots of"),
+                      ),
+                    ],
+                    rows: snapshot.hasData
+                        ? snapshot.data.data.lots
+                            .map(
+                              (e) => DataRow(
+                                cells: [
+                                  DataCell(Text("${e.reference}")),
+                                  DataCell(Text("${e.id}")),
+                                  DataCell(Text("${e.booking}")),
+                                ],
+                              ),
+                            )
+                            .toList()
+                        : [
+                            DataRow(
                               cells: [
-                                DataCell(
-                                    Text("${e.data?.reference.toString()}")),
-                                DataCell(Text("${e.data?.locationStatus}")),
-                                DataCell(Text("${e.data?.booking}")),
+                                DataCell(Text("-")),
+                                DataCell(Text("-")),
+                                DataCell(Text("-")),
                               ],
-                            ))
-                        .toList()
-                    : [
-                        DataRow(cells: [
-                          DataCell(Text("-")),
-                          DataCell(Text("-")),
-                          DataCell(Text("-")),
-                        ])
-                      ],
-              ),
-            ),
+                            )
+                          ],
+                  ),
+                );
+              },
+            )
           ],
         ),
       ),
