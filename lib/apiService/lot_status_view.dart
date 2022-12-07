@@ -6,7 +6,6 @@ import 'package:courier_status/Model/shipment_lot-view_model.dart';
 import 'package:courier_status/Model/update_lot_model.dart';
 import 'package:courier_status/Model/update_status_model.dart';
 import 'package:courier_status/apiService/setToken.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
