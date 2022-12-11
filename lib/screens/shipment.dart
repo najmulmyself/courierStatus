@@ -149,7 +149,45 @@ class _ShipmentState extends State<Shipment> {
                               ),
                             )
                             .toList()
-                        : [],
+                        : [
+                            DataRow(
+                              cells: [
+                                DataCell(Text('1')),
+                                DataCell(
+                                  Center(
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          height: 40,
+                                          width: 40,
+                                          color: Colors.black38,
+                                          child: Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Container(
+                                          height: 40,
+                                          width: 40,
+                                          color: Colors.red,
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                DataCell(Text('Active')),
+                                DataCell(Text('-')),
+                                DataCell(Text('-')),
+                              ],
+                            ),
+                          ],
                   ),
                 ),
                 // Text(shipmentData!.data![0].id.toString()),
