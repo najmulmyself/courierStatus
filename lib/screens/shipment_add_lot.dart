@@ -108,9 +108,9 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
             FutureBuilder<List<Lot>?>(
               future: ApiService().getLotViewData(widget.id),
               builder: (context, AsyncSnapshot snapshot) {
-                print("{snapshot.data} : ${snapshot.data[0].reference}");
+                // print("{snapshot.data} : ${snapshot.data[0].reference}");
                 print("snapshot.error : ${snapshot.error}");
-                return snapshot.hasData
+                return snapshot.data != null
                     ? SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
@@ -144,13 +144,13 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                                   )
                                   .toList()
                               : [
-                                  DataRow(
-                                    cells: [
-                                      DataCell(Text("-")),
-                                      DataCell(Text("-")),
-                                      DataCell(Text("-")),
-                                    ],
-                                  ),
+                                  // DataRow(
+                                  //   cells: [
+                                  //     DataCell(Text("-")),
+                                  //     DataCell(Text("-")),
+                                  //     DataCell(Text("-")),
+                                  //   ],
+                                  // ),
                                 ],
                         ),
                       )
