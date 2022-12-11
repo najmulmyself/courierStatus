@@ -107,8 +107,8 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
             ),
             FutureBuilder<List<Lot>?>(
               future: ApiService().getLotViewData(widget.id),
-              builder: (context, AsyncSnapshot snapshot) {
-                // print("{snapshot.data} : ${snapshot.data[0].reference}");
+              builder: (context, snapshot) {
+                print("{snapshot.data} : ${snapshot.data}");
                 print("snapshot.error : ${snapshot.error}");
                 return snapshot.data != null
                     ? SingleChildScrollView(
@@ -132,7 +132,7 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                             ),
                           ],
                           rows: snapshot.hasData
-                              ? snapshot.data
+                              ? snapshot.data!
                                   .map(
                                     (e) => DataRow(
                                       cells: [
