@@ -6,41 +6,44 @@ import 'package:courier_status/apiService/setToken.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 class SignInPage extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final url = Uri.parse('http://13.214.104.111:1337/api/token/');
+  final url = Uri.parse('http://13.228.51.39:1337/api/token/');
   Future<void> signIn(context) async {
-    final response = await http.post(
-      url,
-      body: {
-        "email": emailController.text,
-        "password": passwordController.text,
-      },
-    );
-    print("Sign in Happend${response.statusCode} ");
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final accToken = data['access'];
-      SetToken().setToken(accToken);
-      print(data['access']);
-      Navigator.pushNamed(context, '/dashboard');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.green,
-          content: Text('Sign in Successful'),
-        ),
+    try {
+      final response = await http.post(
+        url,
+        body: {
+          "email": emailController.text,
+          "password": passwordController.text,
+        },
       );
-      emailController.clear();
-      passwordController.clear();
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Text('Wrong Email or Password'),
-        ),
-      );
+      print("Sign in Happend${response.statusCode} ");
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final accToken = data['access'];
+        SetToken().setToken(accToken);
+        print(data['access']);
+        Navigator.pushNamed(context, '/dashboard');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: Text('Sign in Successful'),
+          ),
+        );
+        emailController.clear();
+        passwordController.clear();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Wrong Email or Password'),
+          ),
+        );
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

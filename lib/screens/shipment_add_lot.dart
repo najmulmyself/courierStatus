@@ -35,18 +35,6 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
     DataCell(Text("-")),
   ];
 
-  // ShipmentLotViewModel? dataRow;
-  // Future<ShipmentLotViewModel?> getShipmentLotView(id) async {
-  //   dataRow = await ApiService().getLotViewData(id);
-  //   return dataRow;
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getShipmentLotView(widget.id);
-  // }
-
   Future<UpdateStatus> getUpdateDatabyId() async {
     return updateStatusData = await ApiService()
         .updateStatus(indexId, refCodeController.text.toString());
@@ -117,52 +105,56 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                 ],
               ),
             ),
-            FutureBuilder<ShipmentLotViewModel?>(
+            FutureBuilder<List<Lot>?>(
               future: ApiService().getLotViewData(widget.id),
               builder: (context, AsyncSnapshot snapshot) {
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    sortAscending: true,
-                    sortColumnIndex: 0,
-                    showBottomBorder: true,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                    ),
-                    columns: [
-                      DataColumn(
-                        label: Text("Reference"),
-                      ),
-                      DataColumn(
-                        label: Text("Location Status"),
-                      ),
-                      DataColumn(
-                        label: Text("Lots of"),
-                      ),
-                    ],
-                    rows: snapshot.hasData
-                        ? snapshot.data.data.lots
-                            .map(
-                              (e) => DataRow(
-                                cells: [
-                                  DataCell(Text("${e.reference}")),
-                                  DataCell(Text("${e.id}")),
-                                  DataCell(Text("${e.booking}")),
-                                ],
-                              ),
-                            )
-                            .toList()
-                        : [
-                            DataRow(
-                              cells: [
-                                DataCell(Text("-")),
-                                DataCell(Text("-")),
-                                DataCell(Text("-")),
-                              ],
-                            )
+                print("{snapshot.data} : ${snapshot.data[0].reference}");
+                print("snapshot.error : ${snapshot.error}");
+                return snapshot.hasData
+                    ? SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: DataTable(
+                          sortAscending: true,
+                          sortColumnIndex: 0,
+                          showBottomBorder: true,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300),
+                          ),
+                          columns: [
+                            DataColumn(
+                              label: Text("Reference"),
+                            ),
+                            DataColumn(
+                              label: Text("Location Status"),
+                            ),
+                            DataColumn(
+                              label: Text("Lots of"),
+                            ),
                           ],
-                  ),
-                );
+                          rows: snapshot.hasData
+                              ? snapshot.data
+                                  .map(
+                                    (e) => DataRow(
+                                      cells: [
+                                        DataCell(Text("${e.reference}")),
+                                        DataCell(Text("${e.id}")),
+                                        DataCell(Text("${e.booking}")),
+                                      ],
+                                    ),
+                                  )
+                                  .toList()
+                              : [
+                                  DataRow(
+                                    cells: [
+                                      DataCell(Text("-")),
+                                      DataCell(Text("-")),
+                                      DataCell(Text("-")),
+                                    ],
+                                  ),
+                                ],
+                        ),
+                      )
+                    : CircularProgressIndicator();
               },
             )
           ],

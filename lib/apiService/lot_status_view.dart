@@ -9,7 +9,7 @@ import 'package:courier_status/apiService/setToken.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  String baseUrl = "http://13.214.104.111:1337/api/";
+  String baseUrl = "http://13.228.51.39:1337/api/";
 
   Future<UpdateLotModel?> getUpdateStatusView() async {
     final token = await GetToken().getToken();
@@ -77,7 +77,7 @@ class ApiService {
     }
   }
 
-  Future<ShipmentLotViewModel?> getLotViewData(id) async {
+  Future<List<Lot>?> getLotViewData(id) async {
     final token = await GetToken().getToken();
     final url = Uri.parse(baseUrl + "shipment/lot-view/" + id + "/");
     final response = await http.get(url, headers: {
@@ -85,7 +85,8 @@ class ApiService {
     });
     if (response.statusCode == 200) {
       print("lotViewSuccess");
-      return ShipmentLotViewModel.fromJson(jsonDecode(response.body));
+      List data = jsonDecode(response.body)["data"]["lots"];
+      return data.map((e) => Lot.fromJson(e)).toList();
     }
   }
 }
