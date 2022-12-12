@@ -102,7 +102,7 @@ class _ShipmentState extends State<Shipment> {
                               cells: [
                                 DataCell(
                                   Text(
-                                    e.id.toString(),
+                                    snapshot.data!.data!.length.toString(),
                                   ),
                                 ),
                                 DataCell(
