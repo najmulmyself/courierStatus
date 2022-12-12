@@ -98,7 +98,11 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                         // backgroundColor: Color(0xff950101),
                         primary: Color(0xff950101),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        print(refCodeController.text);
+                        ApiService().addLotViewDataWithRef(
+                            widget.id, refCodeController.text);
+                      },
                       child: Text("Add"),
                     ),
                   ),

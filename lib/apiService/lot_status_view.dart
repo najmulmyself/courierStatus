@@ -90,4 +90,20 @@ class ApiService {
       return data.map((e) => Lot.fromJson(e)).toList();
     }
   }
+
+  Future<void> addLotViewDataWithRef(id, ref) async {
+    final token = await GetToken().getToken();
+    final url =
+        Uri.parse(baseUrl + "shipment/add-lot/" + id + "/lot-ref/" + ref + "/");
+    final response = await http.get(url, headers: {
+      "Authorization": "Bearer $token",
+    });
+    if (response.statusCode == 200) {
+      print("lotaddSuccessWithRef");
+      // List data = jsonDecode(response.body)["data"]["lots"];
+      // return data.map((e) => Lot.fromJson(e)).toList();
+    } else {
+      print("error form new activity");
+    }
+  }
 }
