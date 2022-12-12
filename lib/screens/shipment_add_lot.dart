@@ -100,8 +100,13 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                       ),
                       onPressed: () {
                         print(refCodeController.text);
-                        ApiService().addLotViewDataWithRef(
-                            widget.id, refCodeController.text);
+                        ApiService()
+                            .addLotViewDataWithRef(
+                                widget.id, refCodeController.text)
+                            .then((value) {
+                          print("value: ${value.toString()}");
+                          setState(() {});
+                        });
                       },
                       child: Text("Add"),
                     ),
@@ -112,8 +117,6 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
             FutureBuilder<List<Lot>?>(
               future: ApiService().getLotViewData(widget.id),
               builder: (context, snapshot) {
-                print("{snapshot.data} : ${snapshot.data}");
-                print("snapshot.error : ${snapshot.error}");
                 return snapshot.data != null
                     ? SingleChildScrollView(
                         scrollDirection: Axis.horizontal,

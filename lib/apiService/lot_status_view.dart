@@ -91,7 +91,7 @@ class ApiService {
     }
   }
 
-  Future<void> addLotViewDataWithRef(id, ref) async {
+  Future<int?> addLotViewDataWithRef(id, ref) async {
     final token = await GetToken().getToken();
     final url =
         Uri.parse(baseUrl + "shipment/add-lot/" + id + "/lot-ref/" + ref + "/");
@@ -100,10 +100,9 @@ class ApiService {
     });
     if (response.statusCode == 200) {
       print("lotaddSuccessWithRef");
-      // List data = jsonDecode(response.body)["data"]["lots"];
-      // return data.map((e) => Lot.fromJson(e)).toList();
+      return 1;
     } else {
-      print("error form new activity");
+      print("Error");
     }
   }
 }
