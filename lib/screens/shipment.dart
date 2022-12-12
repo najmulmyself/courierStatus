@@ -102,7 +102,8 @@ class _ShipmentState extends State<Shipment> {
                               cells: [
                                 DataCell(
                                   Text(
-                                    snapshot.data!.data!.length.toString(),
+                                    // snapshot.data!.data!.length.toString(),
+                                    "${snapshot.data!.data!.indexOf(e) + 1}",
                                   ),
                                 ),
                                 DataCell(
