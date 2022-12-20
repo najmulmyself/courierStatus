@@ -6,10 +6,12 @@ import 'package:courier_status/apiService/setToken.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+String baseUrl = "https://api.kmexpress.com.bd/api/";
+
 class SignInPage extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final url = Uri.parse('http://13.228.51.39:1337/api/token/');
+  final url = Uri.parse(baseUrl + "token/");
   Future<void> signIn(context) async {
     try {
       final response = await http.post(

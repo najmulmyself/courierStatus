@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  String baseUrl = "http://13.228.51.39:1337/api/";
+  String baseUrl = "https://api.kmexpress.com.bd/api/";
 
   Future<UpdateLotModel?> getUpdateStatusView() async {
     final token = await GetToken().getToken();
