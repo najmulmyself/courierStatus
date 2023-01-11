@@ -45,6 +45,16 @@ class DrawerContent extends StatelessWidget {
             },
           ),
         ),
+        Center(
+          child: ListTile(
+            leading: Icon(
+              Icons.security_update_good_outlined,
+              color: Colors.black,
+            ),
+            title: Text('Bulk lot update'),
+            onTap: () {},
+          ),
+        ),
         ListTile(
           leading: Icon(
             Icons.local_shipping,
