@@ -155,7 +155,9 @@ class _ShipmentState extends State<Shipment> {
                                   Text("${e.freightCategory}"),
                                 ),
                                 DataCell(
-                                  Text(e.shipmentNumber.toString()),
+                                  Text(
+                                    e.shipmentNumber.toString(),
+                                  ),
                                 ),
                               ],
                             ),

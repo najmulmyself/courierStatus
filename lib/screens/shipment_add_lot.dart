@@ -105,7 +105,9 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                                 widget.id, refCodeController.text)
                             .then((value) {
                           refCodeController.clear();
-                          print("value: ${value.toString()}");
+                          print(
+                            "value: ${value.toString()}",
+                          );
                           setState(() {});
                         });
                       },

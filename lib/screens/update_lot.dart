@@ -138,7 +138,9 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.red,
-                              content: Text(dataContent.message.toString()),
+                              content: Text(
+                                dataContent.message.toString(),
+                              ),
                             ),
                           );
                         }
@@ -146,7 +148,6 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       child: Text("Update"),
                     ),
                   ),
-                
                 ],
               ),
             ),
@@ -172,21 +173,36 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                 ],
                 rows: dataRow.isNotEmpty
                     ? dataRow
-                        .map((e) => DataRow(
-                              cells: [
-                                DataCell(
-                                    Text("${e.data?.reference.toString()}")),
-                                DataCell(Text("${e.data?.locationStatus}")),
-                                DataCell(Text("${e.data?.booking}")),
-                              ],
-                            ))
+                        .map(
+                          (e) => DataRow(
+                            cells: [
+                              DataCell(
+                                Text("${e.data?.reference.toString()}"),
+                              ),
+                              DataCell(
+                                Text("${e.data?.locationStatus}"),
+                              ),
+                              DataCell(
+                                Text("${e.data?.booking}"),
+                              ),
+                            ],
+                          ),
+                        )
                         .toList()
                     : [
-                        DataRow(cells: [
-                          DataCell(Text("-")),
-                          DataCell(Text("-")),
-                          DataCell(Text("-")),
-                        ])
+                        DataRow(
+                          cells: [
+                            DataCell(
+                              Text("-"),
+                            ),
+                            DataCell(
+                              Text("-"),
+                            ),
+                            DataCell(
+                              Text("-"),
+                            ),
+                          ],
+                        ),
                       ],
               ),
             ),

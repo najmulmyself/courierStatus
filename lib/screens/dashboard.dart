@@ -30,41 +30,43 @@ class DashBoard extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          drawer: Drawer(
-            child: DrawerContent(),
-          ),
-          appBar: AppBar(
-            title: Text('Dashboard'),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15.0),
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 5,
-                  crossAxisCount:
-                      (Orientation == Orientation.portrait) ? 3 : 2),
-              itemBuilder: (BuildContext context, index) {
-                return Card(
-                  color: Colors.grey.shade200,
-                  elevation: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        dashIcon[index],
-                        size: 30,
+        drawer: Drawer(
+          child: DrawerContent(),
+        ),
+        appBar: AppBar(
+          title: Text('Dashboard'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15.0),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 5,
+                crossAxisCount: (Orientation == Orientation.portrait) ? 3 : 2),
+            itemBuilder: (BuildContext context, index) {
+              return Card(
+                color: Colors.grey.shade200,
+                elevation: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      dashIcon[index],
+                      size: 30,
+                    ),
+                    Text(
+                      dashData[index],
+                      style: TextStyle(
+                        fontSize: 15,
                       ),
-                      Text(dashData[index],
-                          style: TextStyle(
-                            fontSize: 15,
-                          )),
-                    ],
-                  ),
-                );
-              },
-              itemCount: 8,
-            ),
-          )),
+                    ),
+                  ],
+                ),
+              );
+            },
+            itemCount: 8,
+          ),
+        ),
+      ),
     );
   }
 }
