@@ -146,70 +146,7 @@ class _UpdateLotStatusState extends State<UpdateLotStatus> {
                       child: Text("Update"),
                     ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     DropdownButton(
-                  //       value: newValue,
-                  //       hint: Text(
-                  //           'Select Status'), // uNderprocessing - Bangladesh
-                  //       items: widget.data!.map(
-                  //         (Datum item) {
-                  //           return DropdownMenuItem<Datum>(
-                  //             child: Text(
-                  //               "${item.name} - ${item.country!.name!} ",
-                  //               style: TextStyle(
-                  //                   // overflow: TextOverflow.fade,
-                  //                   ),
-                  //             ),
-                  //             value: item,
-                  //           );
-                  //         },
-                  //       ).toList(),
-                  //       onChanged: (Datum? v) {
-                  //         setState(() {
-                  //           newValue = v;
-                  //           indexId = v?.id;
-                  //         });
-                  //       },
-                  //     ),
-                  //     Expanded(
-                  //       child: Container(
-                  //         // width: 100,
-                  //         child: ElevatedButton(
-                  //           style: ElevatedButton.styleFrom(
-                  //             // back: Color(0xff950101),
-                  //             // backgroundColor: Color(0xff950101),
-                  //             primary: Color(0xff950101),
-                  //           ),
-                  //           onPressed: () async {
-                  //             UpdateStatus dataContent =
-                  //                 await getUpdateDatabyId();
-                  //             print("messege: ${updateStatusData?.message}");
-                  //             print(
-                  //                 "code: ${updateStatusData?.responseStatusCode}");
-                  //             print(dataContent.responseStatusCode);
-
-                  //             if (dataContent.responseStatusCode == 200) {
-                  //               setState(() {
-                  //                 dataRow.add(dataContent);
-                  //               });
-                  //             } else {
-                  //               ScaffoldMessenger.of(context).showSnackBar(
-                  //                 SnackBar(
-                  //                   backgroundColor: Colors.red,
-                  //                   content:
-                  //                       Text(dataContent.message.toString()),
-                  //                 ),
-                  //               );
-                  //             }
-                  //           },
-                  //           child: Text("Update"),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                
                 ],
               ),
             ),
