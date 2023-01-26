@@ -2,13 +2,14 @@
 
 import 'dart:io';
 
+import 'package:courier_status/screens/dashboard.dart';
 import 'package:courier_status/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanCode extends StatefulWidget {
-  ScanCode({this.notBulk});
-  bool? notBulk;
+  ScanCode({this.isBulk = false});
+  bool? isBulk;
   @override
   State<ScanCode> createState() => _ScanCodeState();
 }
@@ -62,23 +63,56 @@ class _ScanCodeState extends State<ScanCode> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('${result!.code}'),
-                            ElevatedButton(
-                              onPressed: () {
-                                dynamic data = result!.code;
-                                dynamic dataCommaSplit = data.split(",");
-                                dynamic refData = dataCommaSplit[0];
-                                dynamic refDataSplit = refData.split(":");
-                                newResult = refDataSplit[1];
-                                widget.notBulk!
-                                    ? Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                widget.isBulk! == true
+                                    ? ElevatedButton(
+                                        onPressed: () {
+                                          dynamic data = result!.code;
+                                          dynamic dataCommaSplit =
+                                              data.split(",");
+                                          dynamic refData = dataCommaSplit[0];
+                                          dynamic refDataSplit =
+                                              refData.split(":");
+                                          newResult = refDataSplit[1];
+                                          widget.isBulk! == true
+                                              ? Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ScanCode(
+                                                      isBulk: true,
+                                                    ),
+                                                  ),
+                                                )
+                                              : Navigator.pop(
+                                                  context, newResult);
+                                        },
+                                        child: Text("Scan more"),
                                       )
-                                    : Navigator.pop(context, newResult);
-                              },
-                              child: Text("Done"),
+                                    : Container(),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    dynamic data = result!.code;
+                                    dynamic dataCommaSplit = data.split(",");
+                                    dynamic refData = dataCommaSplit[0];
+                                    dynamic refDataSplit = refData.split(":");
+                                    newResult = refDataSplit[1];
+                                    widget.isBulk! == true
+                                        ? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => DashBoard(),
+                                            ),
+                                          )
+                                        : Navigator.pop(context, newResult);
+                                  },
+                                  child: widget.isBulk! == true
+                                      ? Text("Go to Homepage")
+                                      : Text("Done"),
+                                ),
+                              ],
                             ),
                           ],
                         ),

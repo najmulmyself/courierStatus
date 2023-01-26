@@ -64,7 +64,7 @@ class _BulkLotUpdateState extends State<BulkLotUpdate> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ScanCode(notBulk: false,),
+                      builder: (context) => ScanCode(isBulk: true,),
                     ),
                   );
                 }
