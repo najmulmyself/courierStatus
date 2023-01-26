@@ -2,11 +2,13 @@
 
 import 'dart:io';
 
-
+import 'package:courier_status/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanCode extends StatefulWidget {
+  ScanCode({this.notBulk});
+  bool? notBulk;
   @override
   State<ScanCode> createState() => _ScanCodeState();
 }
@@ -67,7 +69,14 @@ class _ScanCodeState extends State<ScanCode> {
                                 dynamic refData = dataCommaSplit[0];
                                 dynamic refDataSplit = refData.split(":");
                                 newResult = refDataSplit[1];
-                                Navigator.pop(context, newResult);
+                                widget.notBulk!
+                                    ? Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => HomePage(),
+                                        ),
+                                      )
+                                    : Navigator.pop(context, newResult);
                               },
                               child: Text("Done"),
                             ),

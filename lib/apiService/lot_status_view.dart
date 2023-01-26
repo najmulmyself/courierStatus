@@ -25,6 +25,7 @@ class ApiService {
       var data = jsonDecode(response.body);
 
       datares = UpdateLotModel.fromJson(data);
+      
     } else {
       print("Error");
     }
@@ -54,12 +55,7 @@ class ApiService {
       return UpdateStatus.withError(message.toString(), response.statusCode);
     }
 
-    // else if (response.statusCode == 500 || response.statusCode == 501) {
-    //   return ScaffoldMessenger(child: Text('Hello'));
-    // } else {
-    //   var message = jsonDecode(response.body)["errors"][0]["non_field_errors"];
-    //   throw onFail(message);
-    // }
+
   }
 
   //getShipment Data

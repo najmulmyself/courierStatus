@@ -2,6 +2,7 @@
 
 import 'package:courier_status/Model/update_lot_model.dart';
 import 'package:courier_status/apiService/lot_status_view.dart';
+import 'package:courier_status/screens/bulk_lot_update.dart';
 import 'package:courier_status/screens/shipment.dart';
 import 'package:courier_status/screens/sign_in_page.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,18 @@ class DrawerContent extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text('Bulk lot update'),
-            onTap: () {},
+            onTap: () async {
+              // Update the state of the app.
+              // ...
+              dropdrownValue = await ApiService().getUpdateStatusView();
+              // ignore: use_build_context_synchronously
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BulkLotUpdate(
+                            data: dropdrownValue!.data,
+                          )));
+            },
           ),
         ),
         ListTile(

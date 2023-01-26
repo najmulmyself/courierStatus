@@ -1,10 +1,11 @@
+import 'package:courier_status/Model/update_lot_model.dart';
+import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
-import '../Model/shipment_data_model.dart';
-
 class BulkLotUpdate extends StatefulWidget {
-  const BulkLotUpdate({super.key});
+  BulkLotUpdate({this.data});
 
+  List<Datum>? data;
   @override
   State<BulkLotUpdate> createState() => _BulkLotUpdateState();
 }
@@ -12,38 +13,89 @@ class BulkLotUpdate extends StatefulWidget {
 class _BulkLotUpdateState extends State<BulkLotUpdate> {
   Datum? newValue;
   String? result = '';
-  List<Datum>? data;
   int? indexId;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DropdownButton(
-                    isExpanded: true,
-                    value: newValue,
-                    hint: Text('Select Status'), // uNderprocessing - Bangladesh
-                    items: widget.data!.map(
-                      (Datum item) {
-                        return DropdownMenuItem<Datum>(
-                          child: Text(
-                            "${item.name} - ${item.country!.name!} ",
-                            style: TextStyle(
-                                // overflow: TextOverflow.fade,
-                                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Update Lot Status',
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DropdownButton<Datum>(
+              isExpanded: true,
+              value: newValue,
+              hint: const Text('Select Status'), // uNderprocessing - Bangladesh
+              items: widget.data!.map(
+                (Datum item) {
+                  return DropdownMenuItem<Datum>(
+                    child: Text(
+                      "${item.name} - ${item.country!.name!} ",
+                      style: TextStyle(
+                          // overflow: TextOverflow.fade,
                           ),
-                          value: item,
-                        );
-                      },
-                    ).toList(),
-                    onChanged: (Datum? v) {
-                      setState(() {
-                        newValue = v;
-                        indexId = v?.id;
-                      });
-                    },
-                  ),
-      ],
+                    ),
+                    value: item,
+                  );
+                },
+              ).toList(),
+              onChanged: (Datum? v) {
+                setState(() {
+                  newValue = v;
+                  indexId = v?.id;
+                });
+              },
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  // back: Color(0xff950101),
+                  // backgroundColor: Color(0xff950101),
+                  primary: Color(0xff950101),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScanCode(notBulk: false,),
+                    ),
+                  );
+                }
+                // () async {
+                // UpdateStatus dataContent = await getUpdateDatabyId();
+                // print("messege: ${updateStatusData?.message}");
+                // print("code: ${updateStatusData?.responseStatusCode}");
+                // print(dataContent.responseStatusCode);
+
+                // if (dataContent.responseStatusCode == 200) {
+                //   setState(() {
+                //     dataRow.add(dataContent);
+                //   });
+                // } else {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     SnackBar(
+                //       backgroundColor: Colors.red,
+                //       content: Text(
+                //         dataContent.message.toString(),
+                //       ),
+                //     ),
+                //   );
+                // }
+
+                ,
+                child: Text("Scan Code"),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
