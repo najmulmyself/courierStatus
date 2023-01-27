@@ -28,7 +28,6 @@ class _ScanCodeState extends State<ScanCode> {
   Future<UpdateStatus> getUpdateDatabyId() async {
     return updateStatusData =
         await ApiService().updateStatus(widget.id, newResult.toString());
-        
   }
 
   @override
@@ -44,9 +43,14 @@ class _ScanCodeState extends State<ScanCode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Scan QR Code'),
-      ),
+      appBar: AppBar(title: Text('Scan QR Code'), actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.home),
+        ),
+      ]),
       body: Column(
         children: <Widget>[
           Expanded(

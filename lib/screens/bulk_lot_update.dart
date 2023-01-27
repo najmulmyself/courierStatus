@@ -2,6 +2,8 @@ import 'package:courier_status/Model/update_lot_model.dart';
 import 'package:courier_status/screens/scan_code.dart';
 import 'package:flutter/material.dart';
 
+import '../Model/update_status_model.dart';
+
 class BulkLotUpdate extends StatefulWidget {
   BulkLotUpdate({this.data});
 
@@ -15,18 +17,26 @@ class _BulkLotUpdateState extends State<BulkLotUpdate> {
   String? result = '';
   int? indexId;
 
+  List<DataCell>? listRow = [
+    DataCell(Text("-")),
+    DataCell(Text("-")),
+    DataCell(Text("-")),
+  ];
+
+  List<UpdateStatus> dataRow = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Update Lot Status',
+          'Bulk Lot Update',
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DropdownButton<Datum>(
               isExpanded: true,
@@ -64,7 +74,7 @@ class _BulkLotUpdateState extends State<BulkLotUpdate> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ScanCode(isBulk: true,id:indexId),
+                      builder: (context) => ScanCode(isBulk: true, id: indexId),
                     ),
                   );
                 }
@@ -93,6 +103,61 @@ class _BulkLotUpdateState extends State<BulkLotUpdate> {
                 child: Text("Scan Code"),
               ),
             ),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: DataTable(
+            //     sortAscending: true,
+            //     sortColumnIndex: 0,
+            //     showBottomBorder: true,
+            //     decoration: BoxDecoration(
+            //       border: Border.all(color: Colors.grey.shade300),
+            //     ),
+            //     columns: const [
+            //       DataColumn(
+            //         label: Text("Reference"),
+            //       ),
+            //       DataColumn(
+            //         label: Text("Location Status"),
+            //       ),
+            //       DataColumn(
+            //         label: Text("Lots of"),
+            //       ),
+            //     ],
+            //     rows: dataRow.isNotEmpty
+            //         ? dataRow
+            //             .map(
+            //               (e) => DataRow(
+            //                 cells: [
+            //                   DataCell(
+            //                     Text("${e.data?.reference.toString()}"),
+            //                   ),
+            //                   DataCell(
+            //                     Text("${e.data?.locationStatus}"),
+            //                   ),
+            //                   DataCell(
+            //                     Text("${e.data?.booking}"),
+            //                   ),
+            //                 ],
+            //               ),
+            //             )
+            //             .toList()
+            //         : [
+            //             DataRow(
+            //               cells: [
+            //                 DataCell(
+            //                   Text("-"),
+            //                 ),
+            //                 DataCell(
+            //                   Text("-"),
+            //                 ),
+            //                 DataCell(
+            //                   Text("-"),
+            //                 ),
+            //               ],
+            //             ),
+            //           ],
+            //   ),
+            // ),
           ],
         ),
       ),
