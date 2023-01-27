@@ -7,9 +7,13 @@ import 'package:courier_status/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import '../Model/update_status_model.dart';
+import '../apiService/lot_status_view.dart';
+
 class ScanCode extends StatefulWidget {
-  ScanCode({this.isBulk = false});
+  ScanCode({this.isBulk = false, this.id = 0});
   bool? isBulk;
+  int? id;
   @override
   State<ScanCode> createState() => _ScanCodeState();
 }
@@ -17,8 +21,15 @@ class ScanCode extends StatefulWidget {
 class _ScanCodeState extends State<ScanCode> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
+  UpdateStatus? updateStatusData;
   String newResult = '';
   QRViewController? controller;
+
+  Future<UpdateStatus> getUpdateDatabyId() async {
+    return updateStatusData =
+        await ApiService().updateStatus(widget.id, newResult.toString());
+        
+  }
 
   @override
   void reassemble() {
@@ -69,6 +80,7 @@ class _ScanCodeState extends State<ScanCode> {
                                 widget.isBulk! == true
                                     ? ElevatedButton(
                                         onPressed: () {
+                                          // this part is for refNumber
                                           dynamic data = result!.code;
                                           dynamic dataCommaSplit =
                                               data.split(",");
@@ -76,6 +88,9 @@ class _ScanCodeState extends State<ScanCode> {
                                           dynamic refDataSplit =
                                               refData.split(":");
                                           newResult = refDataSplit[1];
+                                          widget.id! > 0
+                                              ? getUpdateDatabyId()
+                                              : null;
                                           widget.isBulk! == true
                                               ? Navigator.push(
                                                   context,
@@ -83,6 +98,7 @@ class _ScanCodeState extends State<ScanCode> {
                                                     builder: (context) =>
                                                         ScanCode(
                                                       isBulk: true,
+                                                      id: widget.id,
                                                     ),
                                                   ),
                                                 )
@@ -99,6 +115,7 @@ class _ScanCodeState extends State<ScanCode> {
                                     dynamic refData = dataCommaSplit[0];
                                     dynamic refDataSplit = refData.split(":");
                                     newResult = refDataSplit[1];
+                                    widget.id! > 0 ? getUpdateDatabyId() : null;
                                     widget.isBulk! == true
                                         ? Navigator.push(
                                             context,
