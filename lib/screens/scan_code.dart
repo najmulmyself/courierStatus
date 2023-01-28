@@ -46,7 +46,8 @@ class _ScanCodeState extends State<ScanCode> {
       appBar: AppBar(title: Text('Scan QR Code'), actions: [
         IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => DashBoard()));
           },
           icon: Icon(Icons.home),
         ),
@@ -83,7 +84,7 @@ class _ScanCodeState extends State<ScanCode> {
                               children: [
                                 widget.isBulk! == true
                                     ? ElevatedButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           // this part is for refNumber
                                           dynamic data = result!.code;
                                           dynamic dataCommaSplit =
@@ -92,9 +93,27 @@ class _ScanCodeState extends State<ScanCode> {
                                           dynamic refDataSplit =
                                               refData.split(":");
                                           newResult = refDataSplit[1];
-                                          widget.id! > 0
-                                              ? getUpdateDatabyId()
-                                              : null;
+                                          if (widget.id! > 0) {
+                                            //  widget.id! > 0
+                                            //     ? getUpdateDatabyId()
+                                            //     : null;
+
+                                            UpdateStatus successUpdate =
+                                                await getUpdateDatabyId();
+
+                                            if (successUpdate
+                                                    .responseStatusCode ==
+                                                200) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor: Colors.green,
+                                                  content:
+                                                      Text("Status Updated"),
+                                                ),
+                                              );
+                                            }
+                                          }
                                           widget.isBulk! == true
                                               ? Navigator.push(
                                                   context,
