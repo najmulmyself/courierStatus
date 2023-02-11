@@ -5,24 +5,16 @@ import 'package:flutter/material.dart';
 
 class DashBoard extends StatelessWidget {
   final List dashData = [
-    "Lot",
-    "Bookings",
-    "Location",
-    "Location-Status",
-    "Product",
-    "Activity",
-    "Activity-Status",
-    "Help",
+    "Update Lot Status",
+    "Bulk Lot Update",
+    "Shipment",
+    "Bulk Shipment",
   ];
   final List dashIcon = [
+    Icons.stacked_bar_chart,
+    Icons.security_update_good_outlined,
     Icons.local_shipping,
-    Icons.book,
-    Icons.location_on,
-    Icons.location_on,
-    Icons.shopping_cart,
-    Icons.local_activity,
-    Icons.local_activity,
-    Icons.help,
+    Icons.shopping_cart_sharp,
   ];
 
   @override
@@ -63,7 +55,7 @@ class DashBoard extends StatelessWidget {
                 ),
               );
             },
-            itemCount: 8,
+            itemCount: dashData.length,
           ),
         ),
       ),

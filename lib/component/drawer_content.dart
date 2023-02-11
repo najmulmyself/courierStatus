@@ -38,11 +38,13 @@ class DrawerContent extends StatelessWidget {
               dropdrownValue = await ApiService().getUpdateStatusView();
               // ignore: use_build_context_synchronously
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UpdateLotStatus(
-                            data: dropdrownValue!.data,
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UpdateLotStatus(
+                    data: dropdrownValue!.data,
+                  ),
+                ),
+              );
             },
           ),
         ),
@@ -73,6 +75,23 @@ class DrawerContent extends StatelessWidget {
             color: Colors.black,
           ),
           title: Text('Shipments'),
+          onTap: () async {
+            // Update the state of the app.
+            // ...
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Shipment(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.shopping_cart_sharp,
+            color: Colors.black,
+          ),
+          title: Text('Bulk Shipments'),
           onTap: () async {
             // Update the state of the app.
             // ...
