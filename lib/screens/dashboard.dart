@@ -28,34 +28,156 @@ class DashBoard extends StatelessWidget {
         appBar: AppBar(
           title: Text('Dashboard'),
         ),
+        // body: Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15.0),
+        //   child: GridView.builder(
+        //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //         mainAxisSpacing: 5,
+        //         crossAxisCount: (Orientation == Orientation.portrait) ? 3 : 2),
+        //     itemBuilder: (BuildContext context, index) {
+        //       return Card(
+        //         color: Colors.grey.shade300,
+        //         elevation: 2,
+        //         child: Column(
+        //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //           children: [
+        //             Icon(
+        //               dashIcon[index],
+        //               size: 30,
+        //             ),
+        //             Text(
+        //               dashData[index],
+        // style: TextStyle(
+        //   fontSize: 15,
+        // ),
+        //             ),
+        //           ],
+        //         ),
+        //       );
+        //     },
+        //     itemCount: dashData.length,
+        //   ),
+        // ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15.0),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 5,
-                crossAxisCount: (Orientation == Orientation.portrait) ? 3 : 2),
-            itemBuilder: (BuildContext context, index) {
-              return Card(
-                color: Colors.grey.shade200,
-                elevation: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 18.0),
+                child: Row(
                   children: [
-                    Icon(
-                      dashIcon[index],
-                      size: 30,
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          right: 18,
+                        ),
+                        height: 200,
+                        // width: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              dashIcon[0],
+                              size: 30,
+                            ),
+                            Text(
+                              dashData[0],
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    Text(
-                      dashData[index],
-                      style: TextStyle(
-                        fontSize: 15,
+                    Expanded(
+                      child: Container(
+                        // margin: EdgeInsets.all(8),
+
+                        height: 200,
+                        // width: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              dashIcon[1],
+                              size: 30,
+                            ),
+                            Text(
+                              dashData[1],
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-              );
-            },
-            itemCount: dashData.length,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(right: 18),
+                      height: 200,
+                      // width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            dashIcon[2],
+                            size: 30,
+                          ),
+                          Text(
+                            dashData[2],
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      // margin: EdgeInsets.all(8),
+
+                      height: 200,
+                      // width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            dashIcon[3],
+                            size: 30,
+                          ),
+                          Text(
+                            dashData[3],
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
