@@ -61,11 +61,13 @@ class DrawerContent extends StatelessWidget {
               dropdrownValue = await ApiService().getUpdateStatusView();
               // ignore: use_build_context_synchronously
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BulkLotUpdate(
-                            data: dropdrownValue!.data,
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BulkLotUpdate(
+                    data: dropdrownValue!.data,
+                  ),
+                ),
+              );
             },
           ),
         ),

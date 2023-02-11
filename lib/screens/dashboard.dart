@@ -1,7 +1,13 @@
 // ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks, prefer_const_literals_to_create_immutables
 
 import 'package:courier_status/component/drawer_content.dart';
+import 'package:courier_status/screens/shipment.dart';
+import 'package:courier_status/screens/update_lot.dart';
 import 'package:flutter/material.dart';
+
+import '../Model/update_lot_model.dart';
+import '../apiService/lot_status_view.dart';
+import 'bulk_lot_update.dart';
 
 class DashBoard extends StatelessWidget {
   final List dashData = [
@@ -16,6 +22,7 @@ class DashBoard extends StatelessWidget {
     Icons.local_shipping,
     Icons.shopping_cart_sharp,
   ];
+  UpdateLotModel? dropdrownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +74,111 @@ class DashBoard extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          right: 18,
+                      child: GestureDetector(
+                        onTap: () async {
+                          // Update the state of the app.
+                          // ...
+                          dropdrownValue =
+                              await ApiService().getUpdateStatusView();
+                          // ignore: use_build_context_synchronously
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateLotStatus(
+                                data: dropdrownValue!.data,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            right: 18,
+                          ),
+                          height: 200,
+                          // width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                dashIcon[0],
+                                size: 30,
+                              ),
+                              Text(
+                                dashData[0],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () async {
+                          // Update the state of the app.
+                          // ...
+                          dropdrownValue =
+                              await ApiService().getUpdateStatusView();
+                          // ignore: use_build_context_synchronously
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BulkLotUpdate(
+                                data: dropdrownValue!.data,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          // margin: EdgeInsets.all(8),
+
+                          height: 200,
+                          // width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                dashIcon[1],
+                                size: 30,
+                              ),
+                              Text(
+                                dashData[1],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        // Update the state of the app.
+                        // ...
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Shipment(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 18),
                         height: 200,
                         // width: 200,
                         decoration: BoxDecoration(
@@ -80,11 +188,11 @@ class DashBoard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              dashIcon[0],
+                              dashIcon[2],
                               size: 30,
                             ),
                             Text(
-                              dashData[0],
+                              dashData[2],
                               style: TextStyle(
                                 fontSize: 15,
                               ),
@@ -93,7 +201,19 @@ class DashBoard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        // Update the state of the app.
+                        // ...
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Shipment(),
+                          ),
+                        );
+                      },
                       child: Container(
                         // margin: EdgeInsets.all(8),
 
@@ -106,72 +226,17 @@ class DashBoard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              dashIcon[1],
+                              dashIcon[3],
                               size: 30,
                             ),
                             Text(
-                              dashData[1],
+                              dashData[3],
                               style: TextStyle(
                                 fontSize: 15,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 18),
-                      height: 200,
-                      // width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            dashIcon[2],
-                            size: 30,
-                          ),
-                          Text(
-                            dashData[2],
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      // margin: EdgeInsets.all(8),
-
-                      height: 200,
-                      // width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            dashIcon[3],
-                            size: 30,
-                          ),
-                          Text(
-                            dashData[3],
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                   ),
