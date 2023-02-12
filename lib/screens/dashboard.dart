@@ -97,6 +97,7 @@ class DashBoard extends StatelessWidget {
                           height: 200,
                           // width: 200,
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.grey.shade300,
                           ),
                           child: Column(
@@ -140,6 +141,7 @@ class DashBoard extends StatelessWidget {
                           height: 200,
                           // width: 200,
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.grey.shade300,
                           ),
                           child: Column(
@@ -182,6 +184,7 @@ class DashBoard extends StatelessWidget {
                         height: 200,
                         // width: 200,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Colors.grey.shade300,
                         ),
                         child: Column(
@@ -220,6 +223,7 @@ class DashBoard extends StatelessWidget {
                         height: 200,
                         // width: 200,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Colors.grey.shade300,
                         ),
                         child: Column(

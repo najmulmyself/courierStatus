@@ -149,7 +149,8 @@ class _ShipmentState extends State<Shipment> {
                                   ),
                                 ),
                                 DataCell(
-                                  Text("${e.startDate} - ${e.endDate}"),
+                                  Text(
+                                      "${e.startDate!.day}/${e.startDate!.month}/${e.startDate!.year}  - ${e.endDate!.day}/${e.endDate!.month}/${e.endDate!.year}"),
                                 ),
                                 DataCell(
                                   Text("${e.freightCategory}"),
