@@ -41,6 +41,12 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    ApiService().addLotViewDataWithRef(widget.id, refCodeController.text);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -76,9 +82,14 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
                         child: Icon(Icons.camera_alt),
                         onTap: () async {
                           var scanResult = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ScanCode()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ScanCode(
+                                isShipmentBulk: true,
+                                shipmentId: widget.id,
+                              ),
+                            ),
+                          );
 
                           // print("result-ashif: ${scanResult.toString()}");
 

@@ -74,7 +74,8 @@ class _BulkLotUpdateState extends State<BulkLotUpdate> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ScanCode(isBulk: true, id: indexId),
+                      builder: (context) =>
+                          ScanCode(isUpdateLotBulk: true, id: indexId),
                     ),
                   );
                 }
