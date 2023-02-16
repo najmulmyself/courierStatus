@@ -40,11 +40,11 @@ class _ShipmentAddLotState extends State<ShipmentAddLot> {
         .updateStatus(indexId, refCodeController.text.toString());
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    ApiService().addLotViewDataWithRef(widget.id, refCodeController.text);
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   ApiService().addLotViewDataWithRef(widget.id, refCodeController.text);
+  // }
 
   @override
   Widget build(BuildContext context) {

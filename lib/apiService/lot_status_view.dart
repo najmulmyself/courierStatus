@@ -87,7 +87,7 @@ class ApiService {
     }
   }
 
-  Future<int?> addLotViewDataWithRef(id, ref) async {
+  Future<dynamic> addLotViewDataWithRef(id, ref) async {
     final token = await GetToken().getToken();
     final url =
         Uri.parse(baseUrl + "shipment/add-lot/" + id + "/lot-ref/" + ref + "/");
@@ -96,7 +96,7 @@ class ApiService {
     });
     if (response.statusCode == 200) {
       print("lotaddSuccessWithRef");
-      return 1;
+      return response;
     } else {
       print("Error");
     }

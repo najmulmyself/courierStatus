@@ -31,6 +31,7 @@ class _ScanCodeState extends State<ScanCode> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   UpdateStatus? updateStatusData;
+  UpdateStatus? shipmentUpdateStatusData;
   String newResult = '';
   QRViewController? controller;
 
@@ -41,8 +42,9 @@ class _ScanCodeState extends State<ScanCode> {
 
   // ShipmentBulk
 
-  Future addLotViewDataWithRef(id, ref) async {
-    return ApiService().addLotViewDataWithRef(id, ref);
+  Future<UpdateStatus> testupdate(id, ref) async {
+    return shipmentUpdateStatusData =
+        await ApiService().addLotViewDataWithRef(id, ref);
   }
 
   @override
@@ -197,9 +199,36 @@ class _ScanCodeState extends State<ScanCode> {
                                         //   UpdateStatus successUpdate =
                                         //       await getUpdateDatabyId();
 
-                                        var successUpdate =
-                                            addLotViewDataWithRef(
-                                                widget.shipmentId, newResult);
+                                        ApiService()
+                                            .addLotViewDataWithRef(
+                                                widget.shipmentId, newResult)
+                                            .then((value) {
+                                          if (value != null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor: Colors.green,
+                                                content: Text(
+                                                    "Successfully Updated"),
+                                              ),
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor: Colors.red,
+                                                content: Text("Already Added"),
+                                              ),
+                                            );
+                                          }
+                                        });
+                                        // .catchError((error, stackTrace) =>
+                                        //         ScaffoldMessenger.of(context)
+                                        //             .showSnackBar(SnackBar(
+                                        //           content:
+                                        //               Text(error.toString()),
+                                        //           backgroundColor: Colors.red,
+                                        //         )));
 
                                         // if (successUpdate.responseStatusCode ==
                                         //     200) {
@@ -219,7 +248,8 @@ class _ScanCodeState extends State<ScanCode> {
                                                   builder: (context) =>
                                                       ScanCode(
                                                     isShipmentBulk: true,
-                                                    shipmentId: widget.shipmentId,
+                                                    shipmentId:
+                                                        widget.shipmentId,
                                                   ),
                                                 ),
                                               )
@@ -244,14 +274,35 @@ class _ScanCodeState extends State<ScanCode> {
                                         //     ? getUpdateDatabyId()
                                         //     : null;
                                         // addLotViewDataWithRef(id, ref)@
-                                        ApiService().addLotViewDataWithRef(
-                                            widget.shipmentId, newResult);
+                                        ApiService()
+                                            .addLotViewDataWithRef(
+                                                widget.shipmentId, newResult)
+                                            .then((value) {
+                                          if (value != null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor: Colors.green,
+                                                content: Text(
+                                                    "Successfully Updated"),
+                                              ),
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor: Colors.red,
+                                                content: Text("Already Added"),
+                                              ),
+                                            );
+                                          }
+                                        });
                                         widget.isShipmentBulk! == true
                                             ? Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ShipmentAddLot(),
+                                                      DashBoard(),
                                                 ),
                                               )
                                             : Navigator.pop(context, newResult);
